@@ -2,74 +2,6 @@
   "Ahmet Minguzzi Grubu": [
     {
       "team": "Ajans Of",
-      "played": 1,
-      "won": 1,
-      "drawn": 0,
-      "lost": 0,
-      "goalsFor": 3,
-      "goalsAgainst": 1,
-      "goalDifference": 2,
-      "points": 3
-    },
-    {
-      "team": "Çirihtalar",
-      "played": 1,
-      "won": 0,
-      "drawn": 1,
-      "lost": 0,
-      "goalsFor": 1,
-      "goalsAgainst": 1,
-      "goalDifference": 0,
-      "points": 1
-    },
-    {
-      "team": "Kural Kesiciler",
-      "played": 1,
-      "won": 0,
-      "drawn": 1,
-      "lost": 0,
-      "goalsFor": 1,
-      "goalsAgainst": 1,
-      "goalDifference": 0,
-      "points": 1
-    },
-    {
-      "team": "Ravager",
-      "played": 1,
-      "won": 0,
-      "drawn": 0,
-      "lost": 1,
-      "goalsFor": 1,
-      "goalsAgainst": 3,
-      "goalDifference": -2,
-      "points": 0
-    }
-  ],
-  "Eren Bülbül Grubu": [
-    {
-      "team": "Armedospor",
-      "played": 1,
-      "won": 0,
-      "drawn": 1,
-      "lost": 0,
-      "goalsFor": 1,
-      "goalsAgainst": 1,
-      "goalDifference": 0,
-      "points": 1
-    },
-    {
-      "team": "Araklı 1961 Spor",
-      "played": 1,
-      "won": 0,
-      "drawn": 1,
-      "lost": 0,
-      "goalsFor": 1,
-      "goalsAgainst": 1,
-      "goalDifference": 0,
-      "points": 1
-    },
-    {
-      "team": "Of 1461",
       "played": 0,
       "won": 0,
       "drawn": 0,
@@ -80,7 +12,29 @@
       "points": 0
     },
     {
-      "team": "Hubuş FK",
+      "team": "Ravager",
+      "played": 0,
+      "won": 0,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "team": "Çirihtalar",
+      "played": 0,
+      "won": 0,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "team": "Kural Kesiciler",
       "played": 0,
       "won": 0,
       "drawn": 0,
@@ -93,7 +47,7 @@
   ],
   "Narin Güran Grubu": [
     {
-      "team": "Fortuna United",
+      "team": "Fortuna Unıted",
       "played": 0,
       "won": 0,
       "drawn": 0,
@@ -127,6 +81,64 @@
     },
     {
       "team": "61.Alay",
+      "played": 0,
+      "won": 0,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    }
+  ],
+  "Eren Bülbül Grubu": [
+    {
+      "team": "Of 1461",
+      "played": 0,
+      "won": 0,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "team": "Hubuş FK",
+      "played": 0,
+      "won": 0,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "team": "Armedospor",
+      "played": 0,
+      "won": 0,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "team": "Araklı 1961 Spor",
+      "played": 0,
+      "won": 0,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    }
+  ],
+  "undefined": [
+    {
       "played": 0,
       "won": 0,
       "drawn": 0,
