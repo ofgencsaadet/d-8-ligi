@@ -1,0 +1,29 @@
+[
+  {
+    "date": "16.06.2025",
+    "time": "21:00",
+    "group": "Ahmet Minguzzi Grubu",
+    "team1": "Ajans Of",
+    "team2": "Ravager",
+    "score1": 3,
+    "score2": 1
+  },
+  {
+    "date": "16.06.2025",
+    "time": "22:00",
+    "group": "Ahmet Minguzzi Grubu",
+    "team1": "Çirihtalar",
+    "team2": "Kural Kesiciler",
+    "score1": 1,
+    "score2": 1
+  },
+  {
+    "date": "17.06.2025",
+    "time": "23:00",
+    "group": "Eren Bülbül Grubu",
+    "team1": "Armedospor",
+    "team2": "Araklı 1961 Spor",
+    "score1": 1,
+    "score2": 1
+  }
+]

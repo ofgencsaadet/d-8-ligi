@@ -1,0 +1,171 @@
+{
+  "groups": {
+    "Ahmet Minguzzi Grubu": ["Ajans Of", "Ravager", "Çirihtalar", "Kural Kesiciler"],
+    "Eren Bülbül Grubu": ["Armedospor", "Araklı 1961 Spor", "Of 1461", "Hubuş FK"],
+    "Narin Güran Grubu": ["Fortuna United", "Of FK", "Ofside", "61.Alay"]
+  },
+  "matches": [
+    {
+      "tarih": "16.06.2024",
+      "saat": "10:00",
+      "grup": "Ahmet Minguzzi Grubu",
+      "takim1": "Ajans Of",
+      "takim2": "Ravager",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "16.06.2024",
+      "saat": "11:30",
+      "grup": "Ahmet Minguzzi Grubu",
+      "takim1": "Çirihtalar",
+      "takim2": "Kural Kesiciler",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "17.06.2024",
+      "saat": "10:00",
+      "grup": "Eren Bülbül Grubu",
+      "takim1": "Armedospor",
+      "takim2": "Araklı 1961 Spor",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "17.06.2024",
+      "saat": "11:30",
+      "grup": "Eren Bülbül Grubu",
+      "takim1": "Of 1461",
+      "takim2": "Hubuş FK",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "18.06.2024",
+      "saat": "10:00",
+      "grup": "Narin Güran Grubu",
+      "takim1": "Fortuna United",
+      "takim2": "Of FK",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "18.06.2024",
+      "saat": "11:30",
+      "grup": "Narin Güran Grubu",
+      "takim1": "Ofside",
+      "takim2": "61.Alay",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "19.06.2024",
+      "saat": "10:00",
+      "grup": "Ahmet Minguzzi Grubu",
+      "takim1": "Ajans Of",
+      "takim2": "Çirihtalar",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "19.06.2024",
+      "saat": "11:30",
+      "grup": "Ahmet Minguzzi Grubu",
+      "takim1": "Ravager",
+      "takim2": "Kural Kesiciler",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "20.06.2024",
+      "saat": "10:00",
+      "grup": "Eren Bülbül Grubu",
+      "takim1": "Armedospor",
+      "takim2": "Of 1461",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "20.06.2024",
+      "saat": "11:30",
+      "grup": "Eren Bülbül Grubu",
+      "takim1": "Araklı 1961 Spor",
+      "takim2": "Hubuş FK",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "21.06.2024",
+      "saat": "10:00",
+      "grup": "Narin Güran Grubu",
+      "takim1": "Fortuna United",
+      "takim2": "Ofside",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "21.06.2024",
+      "saat": "11:30",
+      "grup": "Narin Güran Grubu",
+      "takim1": "Of FK",
+      "takim2": "61.Alay",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "22.06.2024",
+      "saat": "10:00",
+      "grup": "Ahmet Minguzzi Grubu",
+      "takim1": "Ajans Of",
+      "takim2": "Kural Kesiciler",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "22.06.2024",
+      "saat": "11:30",
+      "grup": "Ahmet Minguzzi Grubu",
+      "takim1": "Ravager",
+      "takim2": "Çirihtalar",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "23.06.2024",
+      "saat": "10:00",
+      "grup": "Eren Bülbül Grubu",
+      "takim1": "Armedospor",
+      "takim2": "Hubuş FK",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "23.06.2024",
+      "saat": "11:30",
+      "grup": "Eren Bülbül Grubu",
+      "takim1": "Araklı 1961 Spor",
+      "takim2": "Of 1461",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "24.06.2024",
+      "saat": "10:00",
+      "grup": "Narin Güran Grubu",
+      "takim1": "Fortuna United",
+      "takim2": "61.Alay",
+      "skor1": null,
+      "skor2": null
+    },
+    {
+      "tarih": "24.06.2024",
+      "saat": "11:30",
+      "grup": "Narin Güran Grubu",
+      "takim1": "Of FK",
+      "takim2": "Ofside",
+      "skor1": null,
+      "skor2": null
+    }
+  ]
+} 
