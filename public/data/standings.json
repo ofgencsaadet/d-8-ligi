@@ -2,25 +2,14 @@
   "Ahmet Minguzzi Grubu": [
     {
       "team": "Ajans Of",
-      "played": 0,
-      "won": 0,
+      "played": 1,
+      "won": 1,
       "drawn": 0,
       "lost": 0,
-      "goalsFor": 0,
-      "goalsAgainst": 0,
-      "goalDifference": 0,
-      "points": 0
-    },
-    {
-      "team": "Ravager",
-      "played": 0,
-      "won": 0,
-      "drawn": 0,
-      "lost": 0,
-      "goalsFor": 0,
-      "goalsAgainst": 0,
-      "goalDifference": 0,
-      "points": 0
+      "goalsFor": 15,
+      "goalsAgainst": 1,
+      "goalDifference": 14,
+      "points": 3
     },
     {
       "team": "Çirihtalar",
@@ -43,30 +32,30 @@
       "goalsAgainst": 0,
       "goalDifference": 0,
       "points": 0
+    },
+    {
+      "team": "Ravager",
+      "played": 1,
+      "won": 0,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 1,
+      "goalsAgainst": 15,
+      "goalDifference": -14,
+      "points": 0
     }
   ],
   "Narin Güran Grubu": [
     {
       "team": "Fortuna Unıted",
-      "played": 0,
-      "won": 0,
+      "played": 1,
+      "won": 1,
       "drawn": 0,
       "lost": 0,
-      "goalsFor": 0,
-      "goalsAgainst": 0,
-      "goalDifference": 0,
-      "points": 0
-    },
-    {
-      "team": "Of FK",
-      "played": 0,
-      "won": 0,
-      "drawn": 0,
-      "lost": 0,
-      "goalsFor": 0,
-      "goalsAgainst": 0,
-      "goalDifference": 0,
-      "points": 0
+      "goalsFor": 4,
+      "goalsAgainst": 2,
+      "goalDifference": 2,
+      "points": 3
     },
     {
       "team": "Ofside",
@@ -88,6 +77,17 @@
       "goalsFor": 0,
       "goalsAgainst": 0,
       "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "team": "Of FK",
+      "played": 1,
+      "won": 0,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 2,
+      "goalsAgainst": 4,
+      "goalDifference": -2,
       "points": 0
     }
   ],
