@@ -2,8 +2,8 @@
   "name": "d8-futbol-turnuvasi",
   "version": "1.0.0",
   "type": "module",
-  "description": "D-8 Futbol Turnuvası Web Sitesi",
-  "homepage": "https://huseyinyasarr.github.io/d-8-sampiyonlar-ligi",
+  "description": "D-8 Futbol Turnuvasi Web Sitesi",
+  "homepage": "https://ofgencsaadet.github.io/d-8-ligi",
   "scripts": {
     "dev": "vite",
     "build": "node scripts/copy-data.js && vite build",
