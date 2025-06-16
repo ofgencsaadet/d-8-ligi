@@ -17,7 +17,7 @@ function App() {
         setLoading(true)
         
         // Paralel olarak tüm JSON dosyalarını yükle
-        const basePath = import.meta.env.PROD ? '/d-8-sampiyonlar-ligi' : ''
+        const basePath = import.meta.env.PROD ? '/d-8-ligi' : ''
         const timestamp = new Date().getTime()
         const [standingsRes, playedRes, upcomingRes] = await Promise.all([
           fetch(`${basePath}/data/standings.json?v=${timestamp}`),
