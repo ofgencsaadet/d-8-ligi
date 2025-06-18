@@ -13,24 +13,24 @@
     },
     {
       "team": "Çirihtalar",
-      "played": 0,
-      "won": 0,
+      "played": 1,
+      "won": 1,
       "drawn": 0,
       "lost": 0,
-      "goalsFor": 0,
+      "goalsFor": 6,
       "goalsAgainst": 0,
-      "goalDifference": 0,
-      "points": 0
+      "goalDifference": 6,
+      "points": 3
     },
     {
       "team": "Kural Kesiciler",
-      "played": 0,
+      "played": 1,
       "won": 0,
       "drawn": 0,
-      "lost": 0,
+      "lost": 1,
       "goalsFor": 0,
-      "goalsAgainst": 0,
-      "goalDifference": 0,
+      "goalsAgainst": 6,
+      "goalDifference": -6,
       "points": 0
     },
     {
@@ -94,25 +94,14 @@
   "Eren Bülbül Grubu": [
     {
       "team": "Of 1461",
-      "played": 0,
-      "won": 0,
+      "played": 1,
+      "won": 1,
       "drawn": 0,
       "lost": 0,
-      "goalsFor": 0,
-      "goalsAgainst": 0,
-      "goalDifference": 0,
-      "points": 0
-    },
-    {
-      "team": "Hubuş FK",
-      "played": 0,
-      "won": 0,
-      "drawn": 0,
-      "lost": 0,
-      "goalsFor": 0,
-      "goalsAgainst": 0,
-      "goalDifference": 0,
-      "points": 0
+      "goalsFor": 2,
+      "goalsAgainst": 1,
+      "goalDifference": 1,
+      "points": 3
     },
     {
       "team": "Armedospor",
@@ -134,6 +123,17 @@
       "goalsFor": 0,
       "goalsAgainst": 0,
       "goalDifference": 0,
+      "points": 0
+    },
+    {
+      "team": "Hubuş FK",
+      "played": 1,
+      "won": 0,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 1,
+      "goalsAgainst": 2,
+      "goalDifference": -1,
       "points": 0
     }
   ]
