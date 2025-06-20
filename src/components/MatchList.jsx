@@ -1,7 +1,51 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { isWithinWeek, getWeatherForecast, getWeatherForDateTime, getMockWeatherData } from '../utils/weather'
 
 function MatchList({ matches, type }) {
   const [sortByDate, setSortByDate] = useState(true)
+  const [forecastData, setForecastData] = useState(null)
+  const [weatherLoading, setWeatherLoading] = useState(false)
+
+  // Hava durumu verilerini yükle (sadece upcoming maçlar için)
+  useEffect(() => {
+    if (type === 'upcoming') {
+      const hasWeeklyMatches = matches.some(match => isWithinWeek(match.date))
+      
+      if (hasWeeklyMatches) {
+        setWeatherLoading(true)
+        // Gerçek API çağrısı
+        getWeatherForecast()
+          .then(data => {
+            setForecastData(data)
+          })
+          .catch(error => {
+            console.error('Hava durumu yüklenirken hata:', error)
+            setForecastData(null)
+          })
+          .finally(() => {
+            setWeatherLoading(false)
+          })
+      }
+    }
+  }, [matches, type])
+
+  // Belirli bir maç için hava durumu al
+  const getMatchWeather = (match) => {
+    if (type !== 'upcoming' || !isWithinWeek(match.date)) {
+      return null
+    }
+
+    // Gerçek API verisi var mı?
+    if (forecastData) {
+      const realWeather = getWeatherForDateTime(forecastData, match.date, match.time)
+      if (realWeather) return realWeather
+    }
+
+    // API yoksa mock veri göster
+    return getMockWeatherData()
+  }
+
+
   
   const formatDate = (dateString) => {
     // Eğer dateString undefined, null veya string değilse fallback döndür
@@ -146,12 +190,24 @@ function MatchList({ matches, type }) {
                   
                   <div className="p-4 lg:p-6 hover:bg-gray-50 transition-colors">
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-4">
-                      {/* Saat */}
+                      {/* Saat ve Hava Durumu */}
                       <div className="text-sm text-gray-500 lg:w-1/4">
                         {match.time && <div>🕐 {match.time}</div>}
                         <div className="mt-1 text-xs font-medium text-blue-600">
                           {match.group}
                         </div>
+                        
+                        {/* Hava Durumu */}
+                        {type === 'upcoming' && isWithinWeek(match.date) && (() => {
+                          const weather = getMatchWeather(match)
+                          return weather ? (
+                            <div className="mt-2 flex items-center space-x-1 text-xs">
+                              <span>{weather.icon}</span>
+                              <span className="font-medium text-blue-600">{weather.temperature}°C</span>
+                              <span className="text-gray-500 hidden sm:inline">{weather.description}</span>
+                            </div>
+                          ) : null
+                        })()}
                       </div>
                       
                       {/* Maç */}
@@ -223,10 +279,22 @@ function MatchList({ matches, type }) {
                 {groupMatches.map((match, index) => (
                   <div key={index} className="p-4 lg:p-6 hover:bg-gray-50 transition-colors">
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-4">
-                      {/* Tarih ve Saat */}
+                      {/* Tarih, Saat ve Hava Durumu */}
                       <div className="text-sm text-gray-500 lg:w-1/4">
                         <div>📅 {formatDate(match.date)}</div>
                         {match.time && <div className="mt-1">🕐 {match.time}</div>}
+                        
+                        {/* Hava Durumu */}
+                        {type === 'upcoming' && isWithinWeek(match.date) && (() => {
+                          const weather = getMatchWeather(match)
+                          return weather ? (
+                            <div className="mt-2 flex items-center space-x-1 text-xs">
+                              <span>{weather.icon}</span>
+                              <span className="font-medium text-blue-600">{weather.temperature}°C</span>
+                              <span className="text-gray-500 hidden sm:inline">{weather.description}</span>
+                            </div>
+                          ) : null
+                        })()}
                       </div>
                       
                       {/* Maç */}
