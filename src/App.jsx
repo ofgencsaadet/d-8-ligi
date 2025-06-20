@@ -3,6 +3,7 @@ import Header from './components/Header'
 import StandingsTable from './components/StandingsTable'
 import MatchList from './components/MatchList'
 import LoadingSpinner from './components/LoadingSpinner'
+import QuoteModal from './components/QuoteModal'
 
 function App() {
   const [standings, setStandings] = useState(null)
@@ -10,6 +11,7 @@ function App() {
   const [upcomingMatches, setUpcomingMatches] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [showQuoteModal, setShowQuoteModal] = useState(true)
 
   useEffect(() => {
     const loadData = async () => {
@@ -66,6 +68,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Söz Modal'ı */}
+      <QuoteModal 
+        isVisible={showQuoteModal} 
+        onClose={() => setShowQuoteModal(false)} 
+      />
+      
       <Header />
       
       <main className="container mx-auto px-4 py-8">
@@ -87,20 +95,20 @@ function App() {
           )}
         </section>
 
-        {/* Oynanmış Maçlar */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            ✅ Oynanmış Maçlar
-          </h2>
-          <MatchList matches={playedMatches} type="played" />
-        </section>
-
         {/* Oynanacak Maçlar */}
-        <section>
+        <section className="mb-12">
           <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
             📅 Oynanacak Maçlar
           </h2>
           <MatchList matches={upcomingMatches} type="upcoming" />
+        </section>
+
+        {/* Oynanmış Maçlar */}
+        <section>
+          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+            ✅ Oynanmış Maçlar
+          </h2>
+          <MatchList matches={playedMatches} type="played" />
         </section>
       </main>
 
