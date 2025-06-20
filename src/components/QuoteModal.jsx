@@ -57,7 +57,7 @@ function QuoteModal({ isVisible, onClose }) {
           {/* Alt Çizgi */}
           <div className="mt-6 pt-4 border-t border-gray-200">
             <p className="text-xs text-gray-500">
-              D-8 Futbol Turnuvası'na Hoş Geldiniz! 🏆
+              D-8 Futbol Turnuvasına Hoş Geldiniz! 🏆
             </p>
           </div>
         </div>
