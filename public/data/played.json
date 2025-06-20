@@ -34,5 +34,23 @@
     "team2": "Hubuş FK",
     "score1": 2,
     "score2": 1
+  },
+  {
+    "date": "19.06.2025",
+    "time": "22:00",
+    "group": "Eren Bülbül Grubu",
+    "team1": "Armedospor",
+    "team2": "Araklı 1961 Spor",
+    "score1": 2,
+    "score2": 7
+  },
+  {
+    "date": "19.06.2025",
+    "time": "21:00",
+    "group": "Narin Güran Grubu",
+    "team1": "Ofside",
+    "team2": "61.Alay",
+    "score1": 2,
+    "score2": 2
   }
 ]

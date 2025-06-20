@@ -59,25 +59,25 @@
     },
     {
       "team": "Ofside",
-      "played": 0,
+      "played": 1,
       "won": 0,
-      "drawn": 0,
+      "drawn": 1,
       "lost": 0,
-      "goalsFor": 0,
-      "goalsAgainst": 0,
+      "goalsFor": 2,
+      "goalsAgainst": 2,
       "goalDifference": 0,
-      "points": 0
+      "points": 1
     },
     {
       "team": "61.Alay",
-      "played": 0,
+      "played": 1,
       "won": 0,
-      "drawn": 0,
+      "drawn": 1,
       "lost": 0,
-      "goalsFor": 0,
-      "goalsAgainst": 0,
+      "goalsFor": 2,
+      "goalsAgainst": 2,
       "goalDifference": 0,
-      "points": 0
+      "points": 1
     },
     {
       "team": "Of FK",
@@ -93,6 +93,17 @@
   ],
   "Eren Bülbül Grubu": [
     {
+      "team": "Araklı 1961 Spor",
+      "played": 1,
+      "won": 1,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 7,
+      "goalsAgainst": 2,
+      "goalDifference": 5,
+      "points": 3
+    },
+    {
       "team": "Of 1461",
       "played": 1,
       "won": 1,
@@ -104,28 +115,6 @@
       "points": 3
     },
     {
-      "team": "Armedospor",
-      "played": 0,
-      "won": 0,
-      "drawn": 0,
-      "lost": 0,
-      "goalsFor": 0,
-      "goalsAgainst": 0,
-      "goalDifference": 0,
-      "points": 0
-    },
-    {
-      "team": "Araklı 1961 Spor",
-      "played": 0,
-      "won": 0,
-      "drawn": 0,
-      "lost": 0,
-      "goalsFor": 0,
-      "goalsAgainst": 0,
-      "goalDifference": 0,
-      "points": 0
-    },
-    {
       "team": "Hubuş FK",
       "played": 1,
       "won": 0,
@@ -134,6 +123,17 @@
       "goalsFor": 1,
       "goalsAgainst": 2,
       "goalDifference": -1,
+      "points": 0
+    },
+    {
+      "team": "Armedospor",
+      "played": 1,
+      "won": 0,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 2,
+      "goalsAgainst": 7,
+      "goalDifference": -5,
       "points": 0
     }
   ]
