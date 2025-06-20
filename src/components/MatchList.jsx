@@ -46,15 +46,19 @@ function MatchList({ matches, type }) {
       const dateA = a.date ? a.date.split('.').reverse().join('-') : '9999-12-31'
       const dateB = b.date ? b.date.split('.').reverse().join('-') : '9999-12-31'
       
+      // Oynanmış maçlar için ters sıralama (yeniden eskiye)
+      // Oynanacak maçlar için normal sıralama (eskiden yeniye)
+      const isReverse = type === 'played'
+      
       // Önce tarihe göre sırala
       if (dateA !== dateB) {
-        return dateA.localeCompare(dateB)
+        return isReverse ? dateB.localeCompare(dateA) : dateA.localeCompare(dateB)
       }
       
       // Eğer tarihler aynıysa saate göre sırala
       const timeA = a.time || '23:59'
       const timeB = b.time || '23:59'
-      return timeA.localeCompare(timeB)
+      return isReverse ? timeB.localeCompare(timeA) : timeA.localeCompare(timeB)
     })
   }
 
