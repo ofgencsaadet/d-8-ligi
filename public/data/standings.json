@@ -48,25 +48,14 @@
   "Narin Güran Grubu": [
     {
       "team": "Fortuna Unıted",
-      "played": 1,
-      "won": 1,
+      "played": 2,
+      "won": 2,
       "drawn": 0,
       "lost": 0,
-      "goalsFor": 4,
-      "goalsAgainst": 2,
-      "goalDifference": 2,
-      "points": 3
-    },
-    {
-      "team": "Ofside",
-      "played": 1,
-      "won": 0,
-      "drawn": 1,
-      "lost": 0,
-      "goalsFor": 2,
-      "goalsAgainst": 2,
-      "goalDifference": 0,
-      "points": 1
+      "goalsFor": 10,
+      "goalsAgainst": 4,
+      "goalDifference": 6,
+      "points": 6
     },
     {
       "team": "61.Alay",
@@ -77,6 +66,17 @@
       "goalsFor": 2,
       "goalsAgainst": 2,
       "goalDifference": 0,
+      "points": 1
+    },
+    {
+      "team": "Ofside",
+      "played": 2,
+      "won": 0,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 4,
+      "goalsAgainst": 8,
+      "goalDifference": -4,
       "points": 1
     },
     {
