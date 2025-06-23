@@ -11,6 +11,22 @@ export const quotes = [
   {
     text: "Hakkın hâkimiyeti için çalışmamakla, batılın hâkimiyeti için çalışmak arasında fark yoktur.",
     author: "Necmettin Erbakan"
+  },
+  {
+    text: "Siyaseti önemsemeyen Müslümanları, Müslümanları önemsemeyen siyasetçiler yönetir.",
+    author: "Necmettin Erbakan"
+  },
+  {
+    text: "D-8 sadece ekonomik bir birlik değil, manevi bir kalkınma hamlesidir.",
+    author: "Necmettin Erbakan"
+  },
+  {
+    text: "Fırtınalara yön veren kelebeklerin kanat çırpışıdır.",
+    author: "Necmettin Erbakan"
+  },
+  {
+    text: "Milli Görüş hayra motor, şerre fren olmaktır.",
+    author: "Necmettin Erbakan"
   }
 ]
 
