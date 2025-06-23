@@ -2,25 +2,25 @@
   "Ahmet Minguzzi Grubu": [
     {
       "team": "Ajans Of",
-      "played": 1,
+      "played": 2,
       "won": 1,
-      "drawn": 0,
+      "drawn": 1,
       "lost": 0,
-      "goalsFor": 15,
-      "goalsAgainst": 1,
+      "goalsFor": 16,
+      "goalsAgainst": 2,
       "goalDifference": 14,
-      "points": 3
+      "points": 4
     },
     {
       "team": "Çirihtalar",
-      "played": 1,
+      "played": 2,
       "won": 1,
-      "drawn": 0,
+      "drawn": 1,
       "lost": 0,
-      "goalsFor": 6,
-      "goalsAgainst": 0,
+      "goalsFor": 7,
+      "goalsAgainst": 1,
       "goalDifference": 6,
-      "points": 3
+      "points": 4
     },
     {
       "team": "Kural Kesiciler",
@@ -47,7 +47,7 @@
   ],
   "Narin Güran Grubu": [
     {
-      "team": "Fortuna Unıted",
+      "team": "Fortuna United",
       "played": 2,
       "won": 2,
       "drawn": 0,

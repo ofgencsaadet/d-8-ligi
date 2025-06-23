@@ -12,7 +12,7 @@
     "date": "16.06.2025",
     "time": "22:00",
     "group": "Narin Güran Grubu",
-    "team1": "Fortuna Unıted",
+    "team1": "Fortuna United",
     "team2": "Of FK",
     "score1": 4,
     "score2": 2
@@ -57,9 +57,18 @@
     "date": "23.06.2025",
     "time": "21:00",
     "group": "Narin Güran Grubu",
-    "team1": "Fortuna Unıted",
+    "team1": "Fortuna United",
     "team2": "Ofside",
     "score1": 6,
     "score2": 2
+  },
+  {
+    "date": "23.06.2025",
+    "time": "22:00",
+    "group": "Ahmet Minguzzi Grubu",
+    "team1": "Ajans Of",
+    "team2": "Çirihtalar",
+    "score1": 1,
+    "score2": 1
   }
 ]
