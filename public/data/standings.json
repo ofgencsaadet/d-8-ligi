@@ -24,24 +24,24 @@
     },
     {
       "team": "Kural Kesiciler",
-      "played": 1,
-      "won": 0,
+      "played": 2,
+      "won": 1,
       "drawn": 0,
       "lost": 1,
-      "goalsFor": 0,
-      "goalsAgainst": 6,
-      "goalDifference": -6,
-      "points": 0
+      "goalsFor": 24,
+      "goalsAgainst": 9,
+      "goalDifference": 15,
+      "points": 3
     },
     {
       "team": "Ravager",
-      "played": 1,
+      "played": 2,
       "won": 0,
       "drawn": 0,
-      "lost": 1,
-      "goalsFor": 1,
-      "goalsAgainst": 15,
-      "goalDifference": -14,
+      "lost": 2,
+      "goalsFor": 4,
+      "goalsAgainst": 39,
+      "goalDifference": -35,
       "points": 0
     }
   ],
@@ -94,13 +94,13 @@
   "Eren Bülbül Grubu": [
     {
       "team": "Araklı 1961 Spor",
-      "played": 1,
+      "played": 2,
       "won": 1,
       "drawn": 0,
-      "lost": 0,
-      "goalsFor": 7,
-      "goalsAgainst": 2,
-      "goalDifference": 5,
+      "lost": 1,
+      "goalsFor": 8,
+      "goalsAgainst": 5,
+      "goalDifference": 3,
       "points": 3
     },
     {
@@ -116,14 +116,14 @@
     },
     {
       "team": "Hubuş FK",
-      "played": 1,
-      "won": 0,
+      "played": 2,
+      "won": 1,
       "drawn": 0,
       "lost": 1,
-      "goalsFor": 1,
-      "goalsAgainst": 2,
-      "goalDifference": -1,
-      "points": 0
+      "goalsFor": 4,
+      "goalsAgainst": 3,
+      "goalDifference": 1,
+      "points": 3
     },
     {
       "team": "Armedospor",
