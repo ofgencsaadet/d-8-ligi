@@ -59,14 +59,14 @@
     },
     {
       "team": "61.Alay",
-      "played": 1,
-      "won": 0,
+      "played": 2,
+      "won": 1,
       "drawn": 1,
       "lost": 0,
-      "goalsFor": 2,
-      "goalsAgainst": 2,
-      "goalDifference": 0,
-      "points": 1
+      "goalsFor": 9,
+      "goalsAgainst": 8,
+      "goalDifference": 1,
+      "points": 4
     },
     {
       "team": "Ofside",
@@ -81,13 +81,13 @@
     },
     {
       "team": "Of FK",
-      "played": 1,
+      "played": 2,
       "won": 0,
       "drawn": 0,
-      "lost": 1,
-      "goalsFor": 2,
-      "goalsAgainst": 4,
-      "goalDifference": -2,
+      "lost": 2,
+      "goalsFor": 8,
+      "goalsAgainst": 11,
+      "goalDifference": -3,
       "points": 0
     }
   ],
@@ -104,17 +104,6 @@
       "points": 3
     },
     {
-      "team": "Of 1461",
-      "played": 1,
-      "won": 1,
-      "drawn": 0,
-      "lost": 0,
-      "goalsFor": 2,
-      "goalsAgainst": 1,
-      "goalDifference": 1,
-      "points": 3
-    },
-    {
       "team": "Hubuş FK",
       "played": 2,
       "won": 1,
@@ -126,15 +115,26 @@
       "points": 3
     },
     {
-      "team": "Armedospor",
-      "played": 1,
-      "won": 0,
+      "team": "Of 1461",
+      "played": 2,
+      "won": 1,
       "drawn": 0,
       "lost": 1,
-      "goalsFor": 2,
-      "goalsAgainst": 7,
-      "goalDifference": -5,
-      "points": 0
+      "goalsFor": 3,
+      "goalsAgainst": 4,
+      "goalDifference": -1,
+      "points": 3
+    },
+    {
+      "team": "Armedospor",
+      "played": 2,
+      "won": 1,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 5,
+      "goalsAgainst": 8,
+      "goalDifference": -3,
+      "points": 3
     }
   ]
 }

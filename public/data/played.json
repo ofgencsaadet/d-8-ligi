@@ -88,5 +88,23 @@
     "team2": "Hubuş FK",
     "score1": 1,
     "score2": 3
+  },
+  {
+    "date": "26.06.2025",
+    "time": "22:00",
+    "group": "Narin Güran Grubu",
+    "team1": "Of FK",
+    "team2": "61.Alay",
+    "score1": 6,
+    "score2": 7
+  },
+  {
+    "date": "26.06.2025",
+    "time": "21:00",
+    "group": "Eren Bülbül Grubu",
+    "team1": "Armedospor",
+    "team2": "Of 1461",
+    "score1": 3,
+    "score2": 1
   }
 ]
