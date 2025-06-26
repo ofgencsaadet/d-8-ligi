@@ -78,8 +78,8 @@ function MatchList({ matches, type }) {
     }
     
     // Takım ismini mobile'da kısalt
-    if (teamName.length > 15) {
-      return teamName.substring(0, 15) + '...'
+    if (teamName.length > 18) {
+      return teamName.substring(0, 18) + '...'
     }
     return teamName
   }
