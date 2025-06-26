@@ -31,12 +31,37 @@ function readExcelFile() {
     // Sütun başlıklarını kontrol et
     if (jsonData.length > 0) {
       console.log('Mevcut sütun başlıkları:', Object.keys(jsonData[0]));
+      // Link ile ilgili sütunları bul
+      const linkColumns = Object.keys(jsonData[0]).filter(key => 
+        key.toLowerCase().includes('link') || 
+        key.toLowerCase().includes('video') || 
+        key.toLowerCase().includes('youtube')
+      );
+      if (linkColumns.length > 0) {
+        console.log('Bulunan link sütunları:', linkColumns);
+      } else {
+        console.log('⚠️  Link sütunu bulunamadı. Kullanıcı Excel dosyasına Link sütununu eklemiş mi kontrol edin.');
+      }
     }
     
     console.log('İlk 3 satır:');
     jsonData.slice(0, 3).forEach((row, i) => {
-      console.log(`${i+1}. ${row.Takim1} vs ${row.Takim2} - Skor1: "${row.Skor1}" (${typeof row.Skor1}) - Skor2: "${row.Skor2}" (${typeof row.Skor2})`);
+      // Tüm olası link sütun adlarını test et
+      const possibleLinks = [
+        row.Link, row.link, row.LINK,
+        row['Link'], row['link'], row['LINK'],
+        row.Video, row.video, row.VIDEO,
+        row.YouTube, row.youtube, row.YOUTUBE
+      ].filter(Boolean);
+      
+      const team1 = row.Takım1 || row.Takim1 || 'Bilinmeyen';
+      const team2 = row.Takım2 || row.Takim2 || 'Bilinmeyen';
+      
+      console.log(`${i+1}. ${team1} vs ${team2} - Skor1: "${row.Skor1}" (${typeof row.Skor1}) - Skor2: "${row.Skor2}" (${typeof row.Skor2}) - Link: "${possibleLinks[0] || 'YOK'}" (${typeof (possibleLinks[0] || undefined)})`);
       console.log('   Tüm sütunlar:', Object.keys(row).map(key => `${key}: "${row[key]}"`).join(', '));
+      
+      // Tüm sütun adlarını kontrol et
+      console.log('   Sütun adları karakter karakter:', Object.keys(row).map(key => `"${key}" [${key.length} karakter]`).join(', '));
     });
     
     processData(jsonData);
@@ -50,8 +75,8 @@ function readExcelFile() {
 function createSampleData() {
   const sampleMatches = [
     // Ahmet Minguzzi Grubu
-    { Tarih: '2024-06-16', Grup: 'Ahmet Minguzzi Grubu', Takım1: 'Ajans Of', Takım2: 'Ravager', Skor1: '', Skor2: '' },
-    { Tarih: '2024-06-18', Grup: 'Ahmet Minguzzi Grubu', Takım1: 'Çirihtalar', Takım2: 'Kural Kesiciler', Skor1: '', Skor2: '' },
+    { Tarih: '2024-06-16', Grup: 'Ahmet Minguzzi Grubu', Takım1: 'Ajans Of', Takım2: 'Ravager', Skor1: 3, Skor2: 1, Link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+    { Tarih: '2024-06-18', Grup: 'Ahmet Minguzzi Grubu', Takım1: 'Çirihtalar', Takım2: 'Kural Kesiciler', Skor1: 2, Skor2: 0, Link: '' },
     { Tarih: '2024-06-23', Grup: 'Ahmet Minguzzi Grubu', Takım1: 'Ajans Of', Takım2: 'Çirihtalar', Skor1: '', Skor2: '' },
     { Tarih: '2024-06-25', Grup: 'Ahmet Minguzzi Grubu', Takım1: 'Ravager', Takım2: 'Kural Kesiciler', Skor1: '', Skor2: '' },
     { Tarih: '2024-06-30', Grup: 'Ahmet Minguzzi Grubu', Takım1: 'Ajans Of', Takım2: 'Kural Kesiciler', Skor1: '', Skor2: '' },
@@ -125,6 +150,20 @@ function processData(matches) {
   const upcomingMatches = [];
   const standings = {};
 
+  // Link sütunu adını tespit et
+  let linkColumn = null;
+  if (matches.length > 0) {
+    const possibleLinkColumns = Object.keys(matches[0]).filter(key => 
+      key.toLowerCase().includes('link') || 
+      key.toLowerCase().includes('video') || 
+      key.toLowerCase().includes('youtube')
+    );
+    if (possibleLinkColumns.length > 0) {
+      linkColumn = possibleLinkColumns[0];
+      console.log(`✅ Link sütunu tespit edildi: "${linkColumn}"`);
+    }
+  }
+
   // Grup isimlerini al
   const groups = [...new Set(matches.map(match => match.Grup))];
   
@@ -136,9 +175,12 @@ function processData(matches) {
   // Takım isimlerini al ve puan tablosunu başlat
   matches.forEach(match => {
     const group = match.Grup;
-    if (!standings[group][match.Takim1]) {
-      standings[group][match.Takim1] = {
-        team: match.Takim1,
+    const team1 = match.Takım1 || match.Takim1;
+    const team2 = match.Takım2 || match.Takim2;
+    
+    if (!standings[group][team1]) {
+      standings[group][team1] = {
+        team: team1,
         played: 0,
         won: 0,
         drawn: 0,
@@ -149,9 +191,9 @@ function processData(matches) {
         points: 0
       };
     }
-    if (!standings[group][match.Takim2]) {
-      standings[group][match.Takim2] = {
-        team: match.Takim2,
+    if (!standings[group][team2]) {
+      standings[group][team2] = {
+        team: team2,
         played: 0,
         won: 0,
         drawn: 0,
@@ -166,6 +208,10 @@ function processData(matches) {
 
   // Maçları işle
   matches.forEach(match => {
+    // Esnek sütun isimleri
+    const team1 = match.Takım1 || match.Takim1;
+    const team2 = match.Takım2 || match.Takim2;
+    
     // Skor2 undefined ise boş string yap
     if (match.Skor2 === undefined) match.Skor2 = '';
     if (match.Skor1 === undefined) match.Skor1 = '';
@@ -181,10 +227,11 @@ function processData(matches) {
         date: formatDate(match.Tarih),
         time: formatTime(match.Saat),
         group: match.Grup,
-        team1: match.Takim1,
-        team2: match.Takim2,
+        team1: team1,
+        team2: team2,
         score1: parseInt(match.Skor1),
-        score2: parseInt(match.Skor2)
+        score2: parseInt(match.Skor2),
+        videoLink: linkColumn ? (match[linkColumn] || null) : null
       });
 
       // Puan tablosunu güncelle
@@ -193,39 +240,39 @@ function processData(matches) {
       const score2 = parseInt(match.Skor2);
 
       // Takım 1 istatistikleri
-      standings[group][match.Takim1].played++;
-      standings[group][match.Takim1].goalsFor += score1;
-      standings[group][match.Takim1].goalsAgainst += score2;
+      standings[group][team1].played++;
+      standings[group][team1].goalsFor += score1;
+      standings[group][team1].goalsAgainst += score2;
 
       // Takım 2 istatistikleri
-      standings[group][match.Takim2].played++;
-      standings[group][match.Takim2].goalsFor += score2;
-      standings[group][match.Takim2].goalsAgainst += score1;
+      standings[group][team2].played++;
+      standings[group][team2].goalsFor += score2;
+      standings[group][team2].goalsAgainst += score1;
 
       // Kazanan belirleme
       if (score1 > score2) {
         // Takım 1 kazandı
-        standings[group][match.Takim1].won++;
-        standings[group][match.Takim1].points += 3;
-        standings[group][match.Takim2].lost++;
+        standings[group][team1].won++;
+        standings[group][team1].points += 3;
+        standings[group][team2].lost++;
       } else if (score2 > score1) {
         // Takım 2 kazandı
-        standings[group][match.Takim2].won++;
-        standings[group][match.Takim2].points += 3;
-        standings[group][match.Takim1].lost++;
+        standings[group][team2].won++;
+        standings[group][team2].points += 3;
+        standings[group][team1].lost++;
       } else {
         // Beraberlik
-        standings[group][match.Takim1].drawn++;
-        standings[group][match.Takim1].points += 1;
-        standings[group][match.Takim2].drawn++;
-        standings[group][match.Takim2].points += 1;
+        standings[group][team1].drawn++;
+        standings[group][team1].points += 1;
+        standings[group][team2].drawn++;
+        standings[group][team2].points += 1;
       }
 
       // Averaj hesaplama
-      standings[group][match.Takim1].goalDifference = 
-        standings[group][match.Takim1].goalsFor - standings[group][match.Takim1].goalsAgainst;
-      standings[group][match.Takim2].goalDifference = 
-        standings[group][match.Takim2].goalsFor - standings[group][match.Takim2].goalsAgainst;
+      standings[group][team1].goalDifference = 
+        standings[group][team1].goalsFor - standings[group][team1].goalsAgainst;
+      standings[group][team2].goalDifference = 
+        standings[group][team2].goalsFor - standings[group][team2].goalsAgainst;
 
     } else {
       // Oynanacak maç
@@ -233,8 +280,8 @@ function processData(matches) {
         date: formatDate(match.Tarih),
         time: formatTime(match.Saat),
         group: match.Grup,
-        team1: match.Takim1,
-        team2: match.Takim2
+        team1: team1,
+        team2: team2
       });
     }
   });

@@ -1,0 +1,38 @@
+{
+  "Ahmet Minguzzi Grubu": [
+    {
+      "played": 0,
+      "won": 0,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    }
+  ],
+  "Narin Güran Grubu": [
+    {
+      "played": 0,
+      "won": 0,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    }
+  ],
+  "Eren Bülbül Grubu": [
+    {
+      "played": 0,
+      "won": 0,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "goalDifference": 0,
+      "points": 0
+    }
+  ]
+}

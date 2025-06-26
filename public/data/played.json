@@ -6,7 +6,8 @@
     "team1": "Ajans Of",
     "team2": "Ravager",
     "score1": 15,
-    "score2": 1
+    "score2": 1,
+    "videoLink": "https://youtu.be/uAyL-1RXy30"
   },
   {
     "date": "16.06.2025",
@@ -15,7 +16,8 @@
     "team1": "Fortuna United",
     "team2": "Of FK",
     "score1": 4,
-    "score2": 2
+    "score2": 2,
+    "videoLink": "https://youtu.be/HZrAxbLTD4E"
   },
   {
     "date": "18.06.2025",
@@ -24,7 +26,8 @@
     "team1": "Çirihtalar",
     "team2": "Kural Kesiciler",
     "score1": 6,
-    "score2": 0
+    "score2": 0,
+    "videoLink": "https://youtu.be/xkq854V1MVs"
   },
   {
     "date": "18.06.2025",
@@ -33,7 +36,8 @@
     "team1": "Of 1461",
     "team2": "Hubuş FK",
     "score1": 2,
-    "score2": 1
+    "score2": 1,
+    "videoLink": "https://youtu.be/nqf2RPCnLGw"
   },
   {
     "date": "19.06.2025",
@@ -42,7 +46,8 @@
     "team1": "Armedospor",
     "team2": "Araklı 1961 Spor",
     "score1": 2,
-    "score2": 7
+    "score2": 7,
+    "videoLink": "https://youtu.be/OUcjYh9v4l0"
   },
   {
     "date": "19.06.2025",
@@ -51,7 +56,8 @@
     "team1": "Ofside",
     "team2": "61.Alay",
     "score1": 2,
-    "score2": 2
+    "score2": 2,
+    "videoLink": "https://youtu.be/0CQJbBd-DCo"
   },
   {
     "date": "23.06.2025",
@@ -60,7 +66,8 @@
     "team1": "Fortuna United",
     "team2": "Ofside",
     "score1": 6,
-    "score2": 2
+    "score2": 2,
+    "videoLink": "https://youtu.be/Mfes4jxAMQ8"
   },
   {
     "date": "23.06.2025",
@@ -69,7 +76,8 @@
     "team1": "Ajans Of",
     "team2": "Çirihtalar",
     "score1": 1,
-    "score2": 1
+    "score2": 1,
+    "videoLink": "https://youtu.be/A4Zsh-nURAQ"
   },
   {
     "date": "25.06.2025",
@@ -78,7 +86,8 @@
     "team1": "Ravager",
     "team2": "Kural Kesiciler",
     "score1": 3,
-    "score2": 24
+    "score2": 24,
+    "videoLink": "https://youtu.be/WNBXhqiaTQQ"
   },
   {
     "date": "25.06.2025",
@@ -87,7 +96,8 @@
     "team1": "Araklı 1961 Spor",
     "team2": "Hubuş FK",
     "score1": 1,
-    "score2": 3
+    "score2": 3,
+    "videoLink": "https://youtu.be/4udqsX0EYMA"
   },
   {
     "date": "26.06.2025",
@@ -96,7 +106,8 @@
     "team1": "Of FK",
     "team2": "61.Alay",
     "score1": 6,
-    "score2": 7
+    "score2": 7,
+    "videoLink": null
   },
   {
     "date": "26.06.2025",
@@ -105,6 +116,7 @@
     "team1": "Armedospor",
     "team2": "Of 1461",
     "score1": 3,
-    "score2": 1
+    "score2": 1,
+    "videoLink": null
   }
 ]

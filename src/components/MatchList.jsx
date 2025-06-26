@@ -249,12 +249,23 @@ function MatchList({ matches, type }) {
                         </div>
                       </div>
                       
-                      {/* Sonuç durumu */}
+                      {/* Sonuç durumu ve İzle Butonu */}
                       <div className="text-center lg:w-1/4">
                         {type === 'upcoming' && (
                           <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
                             ⏳ Beklemede
                           </span>
+                        )}
+                        {type === 'played' && match.videoLink && (
+                          <a
+                            href={match.videoLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
+                          >
+                            <span className="mr-1">📺</span>
+                            Maçı İzle
+                          </a>
                         )}
                       </div>
                     </div>
@@ -336,12 +347,23 @@ function MatchList({ matches, type }) {
                         </div>
                       </div>
                       
-                      {/* Sonuç durumu */}
+                      {/* Sonuç durumu ve İzle Butonu */}
                       <div className="text-center lg:w-1/4">
                         {type === 'upcoming' && (
                           <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
                             ⏳ Beklemede
                           </span>
+                        )}
+                        {type === 'played' && match.videoLink && (
+                          <a
+                            href={match.videoLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
+                          >
+                            <span className="mr-1">📺</span>
+                            Maçı İzle
+                          </a>
                         )}
                       </div>
                     </div>
