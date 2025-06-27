@@ -4,6 +4,7 @@ import StandingsTable from './components/StandingsTable'
 import MatchList from './components/MatchList'
 import LoadingSpinner from './components/LoadingSpinner'
 import QuoteModal from './components/QuoteModal'
+import HeadToHead from './components/HeadToHead'
 
 function App() {
   const [standings, setStandings] = useState(null)
@@ -12,6 +13,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [showQuoteModal, setShowQuoteModal] = useState(true)
+  const [activeTab, setActiveTab] = useState('default') // Varsayılan görünüm
 
   useEffect(() => {
     const loadData = async () => {
@@ -77,39 +79,59 @@ function App() {
       <Header />
       
       <main className="container mx-auto px-4 py-8">
-        {/* Puan Tabloları */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            📊 Puan Tabloları
-          </h2>
-          {standings && (
-            <div className="grid gap-8 lg:grid-cols-1 xl:grid-cols-3">
-              {Object.entries(standings).map(([groupName, teams]) => (
-                <StandingsTable 
-                  key={groupName}
-                  groupName={groupName}
-                  teams={teams}
-                />
-              ))}
-            </div>
-          )}
-        </section>
+        {/* Navigasyon Buton - sadece takım karşılaştırma için */}
+        <div className="mb-8 text-center">
+          <button
+            onClick={() => setActiveTab(activeTab === 'headtohead' ? 'default' : 'headtohead')}
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg"
+          >
+            {activeTab === 'headtohead' ? '⬅️ Ana Sayfaya Dön' : '🥊 Takım Karşılaştırma'}
+          </button>
+        </div>
 
-        {/* Oynanacak Maçlar */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            📅 Oynanacak Maçlar
-          </h2>
-          <MatchList matches={upcomingMatches} type="upcoming" />
-        </section>
+        {/* Head-to-Head Karşılaştırma */}
+        {activeTab === 'headtohead' ? (
+          <section className="mb-12">
+            <HeadToHead matches={playedMatches} />
+          </section>
+        ) : (
+          /* Varsayılan görünüm - eskisi gibi */
+          <>
+            {/* Puan Tabloları */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                📊 Puan Tabloları
+              </h2>
+              {standings && (
+                <div className="grid gap-8 lg:grid-cols-1 xl:grid-cols-3">
+                  {Object.entries(standings).map(([groupName, teams]) => (
+                    <StandingsTable 
+                      key={groupName}
+                      groupName={groupName}
+                      teams={teams}
+                    />
+                  ))}
+                </div>
+              )}
+            </section>
 
-        {/* Oynanmış Maçlar */}
-        <section>
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            ✅ Oynanmış Maçlar
-          </h2>
-          <MatchList matches={playedMatches} type="played" />
-        </section>
+            {/* Oynanacak Maçlar */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                📅 Oynanacak Maçlar
+              </h2>
+              <MatchList matches={upcomingMatches} type="upcoming" />
+            </section>
+
+            {/* Oynanmış Maçlar */}
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                ✅ Oynanmış Maçlar
+              </h2>
+              <MatchList matches={playedMatches} type="played" />
+            </section>
+          </>
+        )}
       </main>
 
       <footer className="bg-gray-800 text-white py-6 mt-12">
