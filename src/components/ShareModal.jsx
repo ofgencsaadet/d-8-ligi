@@ -253,8 +253,9 @@ function ShareModal({ match, isVisible, onClose }) {
       setCardGenerated(true)
     }
     
-    // Logo'yu yükle
-    logo.src = '/logo.png?' + new Date().getTime() // Cache busting
+    // Logo'yu yükle - Vite base path ile uyumlu
+    const logoPath = import.meta.env.BASE_URL + 'logo.png'
+    logo.src = logoPath + '?' + new Date().getTime() // Cache busting
   }
 
   const copyToClipboard = async () => {
