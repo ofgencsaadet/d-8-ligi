@@ -170,7 +170,7 @@ function ShareModal({ match, isVisible, onClose }) {
       ctx.fillStyle = '#666666'
       ctx.font = '42px Arial'
       ctx.textAlign = 'center'
-      ctx.fillText(`🏟️ ${match.group}`, centerX, scoreY + 120)
+      ctx.fillText(`${match.group}`, centerX, scoreY + 120)
       ctx.fillText(`📅 ${match.date}`, centerX, scoreY + 180)
 
       // Website
@@ -219,8 +219,6 @@ function ShareModal({ match, isVisible, onClose }) {
       ctx.fillStyle = '#667eea'
       ctx.font = 'bold 24px Arial'
       ctx.fillText(`- ${randomQuote.author}`, centerX, quoteY + (lines.length * 35) + 40)
-
-      setCardGenerated(true)
     }
 
     // Logo yükle ve çiz
@@ -237,10 +235,14 @@ function ShareModal({ match, isVisible, onClose }) {
         const logoX = centerX - (logoSize / 2)  // Tam ortada
         const logoY = 1250  // Beyaz alan içinde
         ctx.drawImage(logo, logoX, logoY, logoSize, logoSize)
+        
+        // Logo çizildikten sonra kart hazır
+        setCardGenerated(true)
       } catch (error) {
         console.error('Logo çizim hatası:', error)
         // Hata varsa sadece içeriği çiz
         drawCardContent()
+        setCardGenerated(true)
       }
     }
     
@@ -248,6 +250,7 @@ function ShareModal({ match, isVisible, onClose }) {
       console.error('Logo yükleme hatası:', error)
       // Logo yüklenemezse sadece içeriği çiz
       drawCardContent()
+      setCardGenerated(true)
     }
     
     // Logo'yu yükle
