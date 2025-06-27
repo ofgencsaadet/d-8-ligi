@@ -58,23 +58,7 @@ function ShareModal({ match, isVisible, onClose }) {
     ctx.fillStyle = gradient
     ctx.fillRect(0, 0, 1080, 1920)
 
-    // Beyaz kart alanı
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.95)'
-    ctx.roundRect = function(x, y, w, h, r) {
-      this.beginPath()
-      this.moveTo(x + r, y)
-      this.lineTo(x + w - r, y)
-      this.quadraticCurveTo(x + w, y, x + w, y + r)
-      this.lineTo(x + w, y + h - r)
-      this.quadraticCurveTo(x + w, y + h, x + w - r, y + h)
-      this.lineTo(x + r, y + h)
-      this.quadraticCurveTo(x, y + h, x, y + h - r)
-      this.lineTo(x, y + r)
-      this.quadraticCurveTo(x, y, x + r, y)
-      this.closePath()
-      return this
-    }
-    ctx.roundRect(80, 200, 920, 1200, 30).fill()
+    // Beyaz kart alanını dinamik boyutla çizeceğiz - içerik çizildikten sonra
 
     const centerX = 540  // Dikey tasarım merkezi
 
@@ -234,7 +218,46 @@ function ShareModal({ match, isVisible, onClose }) {
         ctx.fillStyle = '#667eea'
         ctx.font = 'bold 36px Arial'
         ctx.textAlign = 'center'
-        ctx.fillText('Genç Saadet Of', centerX, logoY + logoSize + 40)
+        const gencSaadetY = logoY + logoSize + 40
+        ctx.fillText('Genç Saadet Of', centerX, gencSaadetY)
+        
+        // Şimdi beyaz kart alanını çiz - tüm içeriği kapsayacak şekilde
+        const cardStartY = 200
+        const cardEndY = gencSaadetY + 40  // Son yazıdan 40px sonra
+        const cardHeight = cardEndY - cardStartY
+        
+        // Arka planı tekrar çiz
+        const gradient = ctx.createLinearGradient(0, 0, 1080, 1920)
+        gradient.addColorStop(0, '#667eea')
+        gradient.addColorStop(1, '#764ba2')
+        ctx.fillStyle = gradient
+        ctx.fillRect(0, 0, 1080, 1920)
+        
+        // Beyaz kart alanını dinamik boyutla çiz
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.95)'
+        ctx.roundRect = function(x, y, w, h, r) {
+          this.beginPath()
+          this.moveTo(x + r, y)
+          this.lineTo(x + w - r, y)
+          this.quadraticCurveTo(x + w, y, x + w, y + r)
+          this.lineTo(x + w, y + h - r)
+          this.quadraticCurveTo(x + w, y + h, x + w - r, y + h)
+          this.lineTo(x + r, y + h)
+          this.quadraticCurveTo(x, y + h, x, y + h - r)
+          this.lineTo(x, y + r)
+          this.quadraticCurveTo(x, y, x + r, y)
+          this.closePath()
+          return this
+        }
+        ctx.roundRect(80, cardStartY, 920, cardHeight, 30).fill()
+        
+        // İçeriği tekrar çiz
+        drawCardContent()
+        ctx.drawImage(logo, logoX, logoY, logoSize, logoSize)
+        ctx.fillStyle = '#667eea'
+        ctx.font = 'bold 36px Arial'
+        ctx.textAlign = 'center'
+        ctx.fillText('Genç Saadet Of', centerX, gencSaadetY)
         
         // Logo çizildikten sonra kart hazır
         setCardGenerated(true)
@@ -252,10 +275,44 @@ function ShareModal({ match, isVisible, onClose }) {
       const lastContentY = drawCardContent()
       
       // Logo olmadan da "Genç Saadet Of" yazısını ekle
+      const gencSaadetY = lastContentY + 80
+      
+      // Beyaz kart alanını dinamik boyutla çiz
+      const cardStartY = 200
+      const cardEndY = gencSaadetY + 40
+      const cardHeight = cardEndY - cardStartY
+      
+      // Arka planı tekrar çiz
+      const gradient = ctx.createLinearGradient(0, 0, 1080, 1920)
+      gradient.addColorStop(0, '#667eea')
+      gradient.addColorStop(1, '#764ba2')
+      ctx.fillStyle = gradient
+      ctx.fillRect(0, 0, 1080, 1920)
+      
+      // Beyaz kart alanını çiz
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)'
+      ctx.roundRect = function(x, y, w, h, r) {
+        this.beginPath()
+        this.moveTo(x + r, y)
+        this.lineTo(x + w - r, y)
+        this.quadraticCurveTo(x + w, y, x + w, y + r)
+        this.lineTo(x + w, y + h - r)
+        this.quadraticCurveTo(x + w, y + h, x + w - r, y + h)
+        this.lineTo(x + r, y + h)
+        this.quadraticCurveTo(x, y + h, x, y + h - r)
+        this.lineTo(x, y + r)
+        this.quadraticCurveTo(x, y, x + r, y)
+        this.closePath()
+        return this
+      }
+      ctx.roundRect(80, cardStartY, 920, cardHeight, 30).fill()
+      
+      // İçeriği tekrar çiz
+      drawCardContent()
       ctx.fillStyle = '#667eea'
       ctx.font = 'bold 36px Arial'
       ctx.textAlign = 'center'
-      ctx.fillText('Genç Saadet Of', centerX, lastContentY + 80)
+      ctx.fillText('Genç Saadet Of', centerX, gencSaadetY)
       
       setCardGenerated(true)
     }
