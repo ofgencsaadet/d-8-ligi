@@ -1,8 +1,8 @@
 {
-  "name": "d8-futbol-turnuvasi",
+  "name": "d8-sampiyonlar-ligi",
   "version": "1.0.0",
   "type": "module",
-  "description": "D-8 Futbol Turnuvasi Web Sitesi",
+  "description": "D-8 Şampiyonlar Ligi Web Sitesi",
   "homepage": "https://ofgencsaadet.github.io/d-8-ligi",
   "scripts": {
     "dev": "vite",

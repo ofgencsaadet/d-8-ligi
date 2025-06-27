@@ -114,7 +114,7 @@ function App() {
 
       <footer className="bg-gray-800 text-white py-6 mt-12">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2025 Saadet Partisi Of İlçe Gençlik Kolları D-8 Futbol Turnuvası. Tüm hakları saklıdır.</p>
+          <p>&copy; 2025 Saadet Partisi Of İlçe Gençlik Kolları D-8 Şampiyonlar Ligi. Tüm hakları saklıdır.</p>
         </div>
       </footer>
     </div>

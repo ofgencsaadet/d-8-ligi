@@ -17,7 +17,7 @@ function Header() {
           {/* Başlık - Ortada */}
           <div className="text-center mb-4">
             <h1 className="text-3xl md:text-5xl font-bold mb-2">
-              ⚽ D-8 Futbol Turnuvası
+              ⚽ D-8 Şampiyonlar Ligi
             </h1>
             <p className="text-lg md:text-2xl text-blue-100">
               3 Grup • 12 Takım • Büyük Rekabet

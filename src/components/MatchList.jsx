@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { isWithinWeek, getWeatherForecast, getWeatherForDateTime, getMockWeatherData } from '../utils/weather'
+import ShareModal from './ShareModal'
 
 function MatchList({ matches, type }) {
   const [sortByDate, setSortByDate] = useState(true)
   const [forecastData, setForecastData] = useState(null)
   const [weatherLoading, setWeatherLoading] = useState(false)
+  const [shareModal, setShareModal] = useState({ isVisible: false, match: null })
 
   // Hava durumu verilerini yükle (sadece upcoming maçlar için)
   useEffect(() => {
@@ -43,6 +45,16 @@ function MatchList({ matches, type }) {
 
     // API yoksa mock veri göster
     return getMockWeatherData()
+  }
+
+  // Paylaşım modal'ını aç
+  const openShareModal = (match) => {
+    setShareModal({ isVisible: true, match })
+  }
+
+  // Paylaşım modal'ını kapat
+  const closeShareModal = () => {
+    setShareModal({ isVisible: false, match: null })
   }
 
 
@@ -249,23 +261,34 @@ function MatchList({ matches, type }) {
                         </div>
                       </div>
                       
-                      {/* Sonuç durumu ve İzle Butonu */}
+                      {/* Sonuç durumu ve Butonlar */}
                       <div className="text-center lg:w-1/4">
                         {type === 'upcoming' && (
                           <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
                             ⏳ Beklemede
                           </span>
                         )}
-                        {type === 'played' && match.videoLink && (
-                          <a
-                            href={match.videoLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
-                          >
-                            <span className="mr-1">📺</span>
-                            Maçı İzle
-                          </a>
+                        {type === 'played' && (
+                          <div className="flex flex-col space-y-2 items-center">
+                            {match.videoLink && (
+                              <a
+                                href={match.videoLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
+                              >
+                                <span className="mr-1">📺</span>
+                                Maçı İzle
+                              </a>
+                            )}
+                            <button
+                              onClick={() => openShareModal(match)}
+                              className="inline-flex items-center px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
+                            >
+                              <span className="mr-1">📤</span>
+                              Sonucu Paylaş
+                            </button>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -347,23 +370,34 @@ function MatchList({ matches, type }) {
                         </div>
                       </div>
                       
-                      {/* Sonuç durumu ve İzle Butonu */}
+                      {/* Sonuç durumu ve Butonlar */}
                       <div className="text-center lg:w-1/4">
                         {type === 'upcoming' && (
                           <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
                             ⏳ Beklemede
                           </span>
                         )}
-                        {type === 'played' && match.videoLink && (
-                          <a
-                            href={match.videoLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
-                          >
-                            <span className="mr-1">📺</span>
-                            Maçı İzle
-                          </a>
+                        {type === 'played' && (
+                          <div className="flex flex-col space-y-2 items-center">
+                            {match.videoLink && (
+                              <a
+                                href={match.videoLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
+                              >
+                                <span className="mr-1">📺</span>
+                                Maçı İzle
+                              </a>
+                            )}
+                            <button
+                              onClick={() => openShareModal(match)}
+                              className="inline-flex items-center px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200"
+                            >
+                              <span className="mr-1">📤</span>
+                              Sonucu Paylaş
+                            </button>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -374,6 +408,13 @@ function MatchList({ matches, type }) {
           ))}
         </div>
       )}
+
+      {/* Share Modal */}
+      <ShareModal 
+        match={shareModal.match}
+        isVisible={shareModal.isVisible}
+        onClose={closeShareModal}
+      />
     </div>
   )
 }
