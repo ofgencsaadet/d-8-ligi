@@ -79,16 +79,6 @@ function ShareModal({ match, isVisible, onClose }) {
     const centerX = 540  // Dikey tasarım merkezi
 
     const drawCardContent = () => {
-      // Logo pozisyonu (beyaz alan içinde)
-      const logoSize = 80
-      const logoX = centerX - (logoSize / 2)  // Tam ortada
-      const logoY = 1250  // Beyaz alan içinde
-      
-      // Logo'nun altına "Genç Saadet Of" yazısı (ortalı)
-      ctx.fillStyle = '#667eea'
-      ctx.font = 'bold 36px Arial'
-      ctx.textAlign = 'center'
-      ctx.fillText('Genç Saadet Of', centerX, logoY + logoSize + 40)
       
       // Başlık
       ctx.fillStyle = '#667eea'
@@ -218,7 +208,11 @@ function ShareModal({ match, isVisible, onClose }) {
       // Söz yazarı
       ctx.fillStyle = '#667eea'
       ctx.font = 'bold 24px Arial'
-      ctx.fillText(`- ${randomQuote.author}`, centerX, quoteY + (lines.length * 35) + 40)
+      const authorY = quoteY + (lines.length * 35) + 40
+      ctx.fillText(`- ${randomQuote.author}`, centerX, authorY)
+      
+      // Logo'yu söz yazarından sonra koy (dinamik pozisyon)
+      return authorY // Söz yazarının Y pozisyonunu döndür
     }
 
     // Logo yükle ve çiz
@@ -227,14 +221,20 @@ function ShareModal({ match, isVisible, onClose }) {
     
     logo.onload = () => {
       try {
-        // Önce içeriği çiz
-        drawCardContent()
+        // Önce içeriği çiz ve son Y pozisyonunu al
+        const lastContentY = drawCardContent()
         
-        // Sonra logo'yu üzerine çiz (beyaz alan içinde)
+        // Logo'yu söz yazarından sonra koy (dinamik pozisyon)
         const logoSize = 80
         const logoX = centerX - (logoSize / 2)  // Tam ortada
-        const logoY = 1250  // Beyaz alan içinde
+        const logoY = lastContentY + 60  // Söz yazarından 60px sonra
         ctx.drawImage(logo, logoX, logoY, logoSize, logoSize)
+        
+        // "Genç Saadet Of" yazısını logo'nun altına koy
+        ctx.fillStyle = '#667eea'
+        ctx.font = 'bold 36px Arial'
+        ctx.textAlign = 'center'
+        ctx.fillText('Genç Saadet Of', centerX, logoY + logoSize + 40)
         
         // Logo çizildikten sonra kart hazır
         setCardGenerated(true)
@@ -249,7 +249,14 @@ function ShareModal({ match, isVisible, onClose }) {
     logo.onerror = (error) => {
       console.error('Logo yükleme hatası:', error)
       // Logo yüklenemezse sadece içeriği çiz
-      drawCardContent()
+      const lastContentY = drawCardContent()
+      
+      // Logo olmadan da "Genç Saadet Of" yazısını ekle
+      ctx.fillStyle = '#667eea'
+      ctx.font = 'bold 36px Arial'
+      ctx.textAlign = 'center'
+      ctx.fillText('Genç Saadet Of', centerX, lastContentY + 80)
+      
       setCardGenerated(true)
     }
     
