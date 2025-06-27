@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { isWithinWeek, getWeatherForecast, getWeatherForDateTime, getMockWeatherData } from '../utils/weather'
 import ShareModal from './ShareModal'
 
-function MatchList({ matches, type }) {
+function MatchList({ matches, type, onTeamComparison }) {
   const [sortByDate, setSortByDate] = useState(true)
   const [forecastData, setForecastData] = useState(null)
   const [weatherLoading, setWeatherLoading] = useState(false)
@@ -264,9 +264,20 @@ function MatchList({ matches, type }) {
                       {/* Sonuç durumu ve Butonlar */}
                       <div className="text-center lg:w-1/4">
                         {type === 'upcoming' && (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                            ⏳ Beklemede
-                          </span>
+                          <div className="flex flex-col space-y-2 items-center">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                              ⏳ Beklemede
+                            </span>
+                            {onTeamComparison && (
+                              <button
+                                onClick={() => onTeamComparison(match.team1, match.team2)}
+                                className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 hover:bg-purple-200 transition-colors duration-200"
+                              >
+                                <span className="mr-1">⚖️</span>
+                                Takımları Karşılaştır
+                              </button>
+                            )}
+                          </div>
                         )}
                         {type === 'played' && (
                           <div className="flex flex-col space-y-2 items-center">
@@ -373,9 +384,20 @@ function MatchList({ matches, type }) {
                       {/* Sonuç durumu ve Butonlar */}
                       <div className="text-center lg:w-1/4">
                         {type === 'upcoming' && (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                            ⏳ Beklemede
-                          </span>
+                          <div className="flex flex-col space-y-2 items-center">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                              ⏳ Beklemede
+                            </span>
+                            {onTeamComparison && (
+                              <button
+                                onClick={() => onTeamComparison(match.team1, match.team2)}
+                                className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 hover:bg-purple-200 transition-colors duration-200"
+                              >
+                                <span className="mr-1">⚖️</span>
+                                Takımları Karşılaştır
+                              </button>
+                            )}
+                          </div>
                         )}
                         {type === 'played' && (
                           <div className="flex flex-col space-y-2 items-center">

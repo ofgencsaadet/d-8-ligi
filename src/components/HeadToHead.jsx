@@ -1,8 +1,16 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 
-function HeadToHead({ matches }) {
+function HeadToHead({ matches, initialTeams }) {
   const [selectedTeam1, setSelectedTeam1] = useState('')
   const [selectedTeam2, setSelectedTeam2] = useState('')
+
+  // İlk takımları otomatik seç
+  useEffect(() => {
+    if (initialTeams) {
+      setSelectedTeam1(initialTeams.team1)
+      setSelectedTeam2(initialTeams.team2)
+    }
+  }, [initialTeams])
 
   // Takım listesini al
   const teams = useMemo(() => {
@@ -371,9 +379,9 @@ function HeadToHead({ matches }) {
               </h4>
               <div className="text-gray-700 space-y-2">
                 {comparisonData.team1.winPercentage > comparisonData.team2.winPercentage ? (
-                  <p><strong>{comparisonData.team1.name}</strong> daha yüksek galibiyet oranına sahip (%{comparisonData.team1.winPercentage} vs %{comparisonData.team2.winPercentage})</p>
+                  <p><strong>{comparisonData.team1.name}</strong> daha yüksek galibiyet oranına sahip (%{comparisonData.team1.winPercentage} - %{comparisonData.team2.winPercentage})</p>
                 ) : comparisonData.team2.winPercentage > comparisonData.team1.winPercentage ? (
-                  <p><strong>{comparisonData.team2.name}</strong> daha yüksek galibiyet oranına sahip (%{comparisonData.team2.winPercentage} vs %{comparisonData.team1.winPercentage})</p>
+                  <p><strong>{comparisonData.team2.name}</strong> daha yüksek galibiyet oranına sahip (%{comparisonData.team2.winPercentage} - %{comparisonData.team1.winPercentage})</p>
                 ) : (
                   <p>Her iki takım da aynı galibiyet oranına sahip (%{comparisonData.team1.winPercentage})</p>
                 )}

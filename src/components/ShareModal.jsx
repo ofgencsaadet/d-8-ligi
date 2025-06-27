@@ -739,19 +739,20 @@ function ShareModal({ match, type = 'match', data, isVisible, onClose }) {
         className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto relative"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button - Fixed Top Right */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center text-xl z-10 transition-colors"
-        >
-          ×
-        </button>
-
-        {/* Header */}
-        <div className="p-6 border-b pr-12">
+        {/* Header - Sticky */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center rounded-t-lg z-10">
           <h3 className="text-xl font-bold text-gray-800">
             {type === 'match' ? '📤 Sonucu Paylaş' : '📊 Puan Tablosunu Paylaş'}
           </h3>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors duration-200"
+            aria-label="Kapat"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
 
         {/* Content */}
