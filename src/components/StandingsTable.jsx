@@ -1,14 +1,43 @@
+import { useState } from 'react'
+import ShareModal from './ShareModal'
+
 function StandingsTable({ groupName, teams }) {
+  const [shareModalVisible, setShareModalVisible] = useState(false)
+
   const getPositionIcon = (position) => {
     return `${position}.`
+  }
+
+  const handleShare = () => {
+    setShareModalVisible(true)
+  }
+
+  const handleCloseShareModal = () => {
+    setShareModalVisible(false)
+  }
+
+  // ShareModal için data hazırla
+  const shareData = {
+    groupName,
+    teams: teams.slice(0, 4), // İlk 4 takım
+    date: new Date().toLocaleDateString('tr-TR')
   }
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4">
-        <h3 className="text-xl font-bold text-white text-center">
-          {groupName}
-        </h3>
+        <div className="flex items-center justify-between">
+          <h3 className="text-xl font-bold text-white flex-1 text-center">
+            {groupName}
+          </h3>
+          <button
+            onClick={handleShare}
+            className="ml-3 bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center space-x-1"
+          >
+            <span>📤</span>
+            <span>Paylaş</span>
+          </button>
+        </div>
       </div>
       
       <div className="overflow-x-auto">
@@ -112,6 +141,14 @@ function StandingsTable({ groupName, teams }) {
           <span><strong>P:</strong> Puan</span>
         </div>
       </div>
+
+      {/* Share Modal */}
+      <ShareModal
+        type="standings"
+        data={shareData}
+        isVisible={shareModalVisible}
+        onClose={handleCloseShareModal}
+      />
     </div>
   )
 }

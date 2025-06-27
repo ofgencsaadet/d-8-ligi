@@ -1,123 +1,112 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
 
 function HeadToHead({ matches }) {
   const [selectedTeam1, setSelectedTeam1] = useState('')
   const [selectedTeam2, setSelectedTeam2] = useState('')
-  const [comparisonData, setComparisonData] = useState(null)
-  
-  // Takım listesini oluştur
-  const teams = [...new Set(matches.flatMap(match => [match.team1, match.team2]))].sort()
-  
-  // Takım karşılaştırma verilerini hesapla
-  useEffect(() => {
-    if (selectedTeam1 && selectedTeam2 && selectedTeam1 !== selectedTeam2) {
-      calculateTeamComparison()
-    } else {
-      setComparisonData(null)
-    }
-  }, [selectedTeam1, selectedTeam2, matches])
 
+  // Takım listesini al
+  const teams = useMemo(() => {
+    const teamSet = new Set()
+    matches.forEach(match => {
+      if (match.score1 !== null && match.score2 !== null) {
+        teamSet.add(match.team1)
+        teamSet.add(match.team2)
+      }
+    })
+    return Array.from(teamSet).sort()
+  }, [matches])
+
+  // Takım istatistiklerini hesapla (tüm maçlardan)
   const calculateTeamStats = (teamName) => {
-    // Takımın oynadığı tüm maçları bul
-    const teamMatches = matches.filter(match => 
-      (match.team1 === teamName || match.team2 === teamName) &&
-      match.score1 !== undefined && match.score2 !== undefined
-    )
-
+    let totalMatches = 0
     let wins = 0
-    let losses = 0
     let draws = 0
+    let losses = 0
     let goalsFor = 0
     let goalsAgainst = 0
 
-    teamMatches.forEach(match => {
-      let teamScore, opponentScore
-      
+    matches.forEach(match => {
+      if (match.score1 === null || match.score2 === null) return
+
       if (match.team1 === teamName) {
-        teamScore = parseInt(match.score1)
-        opponentScore = parseInt(match.score2)
-      } else {
-        teamScore = parseInt(match.score2)
-        opponentScore = parseInt(match.score1)
-      }
-      
-      goalsFor += teamScore
-      goalsAgainst += opponentScore
-      
-      if (teamScore > opponentScore) {
-        wins++
-      } else if (teamScore < opponentScore) {
-        losses++
-      } else {
-        draws++
+        totalMatches++
+        goalsFor += match.score1
+        goalsAgainst += match.score2
+        if (match.score1 > match.score2) wins++
+        else if (match.score1 === match.score2) draws++
+        else losses++
+      } else if (match.team2 === teamName) {
+        totalMatches++
+        goalsFor += match.score2
+        goalsAgainst += match.score1
+        if (match.score2 > match.score1) wins++
+        else if (match.score2 === match.score1) draws++
+        else losses++
       }
     })
 
+    const goalDifference = goalsFor - goalsAgainst
+    const winPercentage = totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 0
+    const points = wins * 3 + draws
+
     return {
-      totalMatches: teamMatches.length,
+      totalMatches,
       wins,
-      losses,
       draws,
+      losses,
       goalsFor,
       goalsAgainst,
-      goalDifference: goalsFor - goalsAgainst,
-      winPercentage: teamMatches.length > 0 ? Math.round((wins / teamMatches.length) * 100) : 0,
-      points: (wins * 3) + (draws * 1),
-      matches: teamMatches
+      goalDifference,
+      winPercentage,
+      points
     }
   }
-  
+
+  // İki takım karşılaştırması
   const calculateTeamComparison = () => {
+    if (!selectedTeam1 || !selectedTeam2) return null
+
     const team1Stats = calculateTeamStats(selectedTeam1)
     const team2Stats = calculateTeamStats(selectedTeam2)
 
-    // İki takım arasındaki head-to-head maçları da hesapla
-    const h2hMatches = matches.filter(match => 
-      (match.team1 === selectedTeam1 && match.team2 === selectedTeam2) ||
-      (match.team1 === selectedTeam2 && match.team2 === selectedTeam1)
-    ).filter(match => match.score1 !== undefined && match.score2 !== undefined)
+    // Direkt karşılaşmaları bul
+    const headToHeadMatches = matches.filter(match => 
+      match.score1 !== null && match.score2 !== null &&
+      ((match.team1 === selectedTeam1 && match.team2 === selectedTeam2) ||
+       (match.team1 === selectedTeam2 && match.team2 === selectedTeam1))
+    )
 
-    let h2hTeam1Wins = 0
-    let h2hTeam2Wins = 0
-    let h2hDraws = 0
+    let headToHeadStats = {
+      totalMatches: headToHeadMatches.length,
+      team1Wins: 0,
+      team2Wins: 0,
+      draws: 0,
+      matches: headToHeadMatches.map(match => ({
+        ...match,
+        date: new Date(match.date).toLocaleDateString('tr-TR')
+      })).reverse()
+    }
 
-    h2hMatches.forEach(match => {
-      let team1Score, team2Score
-      
-      if (match.team1 === selectedTeam1) {
-        team1Score = parseInt(match.score1)
-        team2Score = parseInt(match.score2)
-      } else {
-        team1Score = parseInt(match.score2)
-        team2Score = parseInt(match.score1)
-      }
-      
-      if (team1Score > team2Score) {
-        h2hTeam1Wins++
-      } else if (team2Score > team1Score) {
-        h2hTeam2Wins++
-      } else {
-        h2hDraws++
-      }
+    headToHeadMatches.forEach(match => {
+      const isTeam1Home = match.team1 === selectedTeam1
+      const team1Score = isTeam1Home ? match.score1 : match.score2
+      const team2Score = isTeam1Home ? match.score2 : match.score1
+
+      if (team1Score > team2Score) headToHeadStats.team1Wins++
+      else if (team2Score > team1Score) headToHeadStats.team2Wins++
+      else headToHeadStats.draws++
     })
 
-    setComparisonData({
+    return {
       team1: { name: selectedTeam1, ...team1Stats },
       team2: { name: selectedTeam2, ...team2Stats },
-      headToHead: {
-        totalMatches: h2hMatches.length,
-        team1Wins: h2hTeam1Wins,
-        team2Wins: h2hTeam2Wins,
-        draws: h2hDraws,
-        matches: h2hMatches.sort((a, b) => {
-          const dateA = a.date.split('.').reverse().join('-')
-          const dateB = b.date.split('.').reverse().join('-')
-          return dateB.localeCompare(dateA)
-        })
-      }
-    })
+      headToHead: headToHeadStats
+    }
   }
 
+  const comparisonData = calculateTeamComparison()
+
+  // Hangi takımın daha iyi olduğunu belirle
   const getBetterTeam = (stat1, stat2, higherIsBetter = true) => {
     if (stat1 === stat2) return 'equal'
     if (higherIsBetter) {
@@ -127,104 +116,79 @@ function HeadToHead({ matches }) {
     }
   }
 
+  // İstatistik rengi belirle
   const getStatColor = (comparison, team) => {
     if (comparison === 'equal') return 'text-gray-600'
-    if (comparison === team) return 'text-green-600 font-bold'
+    if (comparison === team) return 'text-green-600 font-semibold'
     return 'text-red-600'
   }
-  
+
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-4">
-        <h2 className="text-2xl font-bold text-white text-center">
-          🥊 Takım Karşılaştırma
-        </h2>
-        <p className="text-blue-100 text-center mt-1">
-          Takımların tüm maç istatistiklerini karşılaştırın
-        </p>
-      </div>
-      
-      <div className="p-6">
-        {/* Takım Seçim Alanı */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-            <div className="w-full md:w-64">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                1. Takım
-              </label>
-              <select
-                value={selectedTeam1}
-                onChange={(e) => setSelectedTeam1(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Takım Seçin</option>
-                {teams.map(team => (
-                  <option key={team} value={team} disabled={team === selectedTeam2}>
-                    {team}
-                  </option>
-                ))}
-              </select>
-            </div>
-            
-            <div className="text-3xl font-bold text-gray-400 mt-6 md:mt-8">
-              🆚
-            </div>
-            
-            <div className="w-full md:w-64">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                2. Takım
-              </label>
-              <select
-                value={selectedTeam2}
-                onChange={(e) => setSelectedTeam2(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Takım Seçin</option>
-                {teams.map(team => (
-                  <option key={team} value={team} disabled={team === selectedTeam1}>
-                    {team}
-                  </option>
-                ))}
-              </select>
-            </div>
+    <div className="space-y-6">
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          🏆 Takım Karşılaştırması
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              İlk Takım
+            </label>
+            <select
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={selectedTeam1}
+              onChange={(e) => setSelectedTeam1(e.target.value)}
+            >
+              <option value="">Takım seçin...</option>
+              {teams.filter(team => team !== selectedTeam2).map(team => (
+                <option key={team} value={team}>{team}</option>
+              ))}
+            </select>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              İkinci Takım
+            </label>
+            <select
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={selectedTeam2}
+              onChange={(e) => setSelectedTeam2(e.target.value)}
+            >
+              <option value="">Takım seçin...</option>
+              {teams.filter(team => team !== selectedTeam1).map(team => (
+                <option key={team} value={team}>{team}</option>
+              ))}
+            </select>
           </div>
         </div>
-        
-        {/* Karşılaştırma Sonuçları */}
-        {comparisonData && selectedTeam1 && selectedTeam2 && (
-          <div className="space-y-8">
-            {/* Takım İsimleri */}
-            <div className="text-center">
-              <h3 className="text-2xl font-bold text-gray-800">
-                {selectedTeam1} 🆚 {selectedTeam2}
-              </h3>
-            </div>
-            
+
+        {comparisonData && (
+          <div className="space-y-6">
             {/* Genel İstatistikler Karşılaştırması */}
             <div>
               <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                📊 Genel İstatistikler Karşılaştırması
+                📊 Genel İstatistikler
               </h4>
-              
               <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-gray-300 rounded-lg table-fixed">
+                <table className="w-full table-fixed border-collapse border border-gray-300">
                   <colgroup>
-                    <col className="w-1/3" />
-                    <col className="w-1/3" />
-                    <col className="w-1/3" />
+                    <col style={{ width: '33.33%' }} />
+                    <col style={{ width: '33.34%' }} />
+                    <col style={{ width: '33.33%' }} />
                   </colgroup>
                   <thead>
-                    <tr className="bg-gray-50">
-                      <th className="border border-gray-300 px-2 py-3 text-center font-medium text-blue-700">
+                    <tr className="bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+                      <th className="border border-gray-300 px-2 py-3 text-center font-bold">
                         <div className="truncate" title={comparisonData.team1.name}>
                           {comparisonData.team1.name}
                         </div>
                       </th>
-                      <th className="border border-gray-300 px-2 py-3 text-center font-medium text-gray-700">
+                      <th className="border border-gray-300 px-2 py-3 text-center font-bold">
                         İstatistik
                       </th>
-                      <th className="border border-gray-300 px-2 py-3 text-center font-medium text-purple-700">
+                      <th className="border border-gray-300 px-2 py-3 text-center font-bold">
                         <div className="truncate" title={comparisonData.team2.name}>
                           {comparisonData.team2.name}
                         </div>
@@ -415,9 +379,9 @@ function HeadToHead({ matches }) {
                 )}
                 
                 {comparisonData.team1.goalsFor > comparisonData.team2.goalsFor ? (
-                  <p><strong>{comparisonData.team1.name}</strong> daha fazla gol atmış ({comparisonData.team1.goalsFor} vs {comparisonData.team2.goalsFor})</p>
+                  <p><strong>{comparisonData.team1.name}</strong> daha fazla gol atmış ({comparisonData.team1.goalsFor} - {comparisonData.team2.goalsFor})</p>
                 ) : comparisonData.team2.goalsFor > comparisonData.team1.goalsFor ? (
-                  <p><strong>{comparisonData.team2.name}</strong> daha fazla gol atmış ({comparisonData.team2.goalsFor} vs {comparisonData.team1.goalsFor})</p>
+                  <p><strong>{comparisonData.team2.name}</strong> daha fazla gol atmış ({comparisonData.team2.goalsFor} - {comparisonData.team1.goalsFor})</p>
                 ) : (
                   <p>Her iki takım da aynı sayıda gol atmış ({comparisonData.team1.goalsFor})</p>
                 )}
@@ -425,11 +389,11 @@ function HeadToHead({ matches }) {
                 {comparisonData.headToHead.totalMatches > 0 && (
                   <>
                     {comparisonData.headToHead.team1Wins > comparisonData.headToHead.team2Wins ? (
-                      <p>Aralarındaki maçlarda <strong>{comparisonData.team1.name}</strong> üstün ({comparisonData.headToHead.team1Wins}-{comparisonData.headToHead.team2Wins})</p>
+                      <p>Aralarındaki maçlarda <strong>{comparisonData.team1.name}</strong> galibiyet sayısı olarak üstün ({comparisonData.headToHead.team1Wins} - {comparisonData.headToHead.team2Wins})</p>
                     ) : comparisonData.headToHead.team2Wins > comparisonData.headToHead.team1Wins ? (
-                      <p>Aralarındaki maçlarda <strong>{comparisonData.team2.name}</strong> üstün ({comparisonData.headToHead.team2Wins}-{comparisonData.headToHead.team1Wins})</p>
+                      <p>Aralarındaki maçlarda <strong>{comparisonData.team2.name}</strong> galibiyet sayısı olarak üstün ({comparisonData.headToHead.team2Wins} - {comparisonData.headToHead.team1Wins})</p>
                     ) : (
-                      <p>Aralarındaki maçlarda eşitlik var ({comparisonData.headToHead.team1Wins}-{comparisonData.headToHead.team2Wins})</p>
+                      <p>Aralarındaki maçlarda eşitlik var ({comparisonData.headToHead.team1Wins} - {comparisonData.headToHead.team2Wins})</p>
                     )}
                   </>
                 )}
@@ -439,7 +403,7 @@ function HeadToHead({ matches }) {
         )}
       </div>
     </div>
-    )
+  )
 }
 
 export default HeadToHead 
