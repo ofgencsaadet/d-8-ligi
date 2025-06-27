@@ -208,117 +208,126 @@ function HeadToHead({ matches }) {
               </h4>
               
               <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-gray-300 rounded-lg">
+                <table className="w-full border-collapse border border-gray-300 rounded-lg table-fixed">
+                  <colgroup>
+                    <col className="w-1/3" />
+                    <col className="w-1/3" />
+                    <col className="w-1/3" />
+                  </colgroup>
                   <thead>
                     <tr className="bg-gray-50">
-                      <th className="border border-gray-300 px-4 py-3 text-center font-medium text-blue-700">
-                        {comparisonData.team1.name}
+                      <th className="border border-gray-300 px-2 py-3 text-center font-medium text-blue-700">
+                        <div className="truncate" title={comparisonData.team1.name}>
+                          {comparisonData.team1.name}
+                        </div>
                       </th>
-                      <th className="border border-gray-300 px-4 py-3 text-center font-medium text-gray-700">
+                      <th className="border border-gray-300 px-2 py-3 text-center font-medium text-gray-700">
                         İstatistik
                       </th>
-                      <th className="border border-gray-300 px-4 py-3 text-center font-medium text-purple-700">
-                        {comparisonData.team2.name}
+                      <th className="border border-gray-300 px-2 py-3 text-center font-medium text-purple-700">
+                        <div className="truncate" title={comparisonData.team2.name}>
+                          {comparisonData.team2.name}
+                        </div>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.totalMatches, comparisonData.team2.totalMatches), 'team1')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.totalMatches, comparisonData.team2.totalMatches), 'team1')}`}>
                         {comparisonData.team1.totalMatches}
                       </td>
-                      <td className="border border-gray-300 px-4 py-3 text-center font-medium bg-gray-50">
+                      <td className="border border-gray-300 px-2 py-3 text-center font-medium bg-gray-50">
                         Toplam Maç
                       </td>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.totalMatches, comparisonData.team2.totalMatches), 'team2')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.totalMatches, comparisonData.team2.totalMatches), 'team2')}`}>
                         {comparisonData.team2.totalMatches}
                       </td>
                     </tr>
                     <tr>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.wins, comparisonData.team2.wins), 'team1')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.wins, comparisonData.team2.wins), 'team1')}`}>
                         {comparisonData.team1.wins}
                       </td>
-                      <td className="border border-gray-300 px-4 py-3 text-center font-medium">
+                      <td className="border border-gray-300 px-2 py-3 text-center font-medium">
                         Galibiyet
                       </td>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.wins, comparisonData.team2.wins), 'team2')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.wins, comparisonData.team2.wins), 'team2')}`}>
                         {comparisonData.team2.wins}
                       </td>
                     </tr>
                     <tr>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.draws, comparisonData.team2.draws), 'team1')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.draws, comparisonData.team2.draws), 'team1')}`}>
                         {comparisonData.team1.draws}
                       </td>
-                      <td className="border border-gray-300 px-4 py-3 text-center font-medium bg-gray-50">
+                      <td className="border border-gray-300 px-2 py-3 text-center font-medium bg-gray-50">
                         Beraberlik
                       </td>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.draws, comparisonData.team2.draws), 'team2')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.draws, comparisonData.team2.draws), 'team2')}`}>
                         {comparisonData.team2.draws}
                       </td>
                     </tr>
                     <tr>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.losses, comparisonData.team2.losses, false), 'team1')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.losses, comparisonData.team2.losses, false), 'team1')}`}>
                         {comparisonData.team1.losses}
                       </td>
-                      <td className="border border-gray-300 px-4 py-3 text-center font-medium">
+                      <td className="border border-gray-300 px-2 py-3 text-center font-medium">
                         Mağlubiyet
                       </td>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.losses, comparisonData.team2.losses, false), 'team2')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.losses, comparisonData.team2.losses, false), 'team2')}`}>
                         {comparisonData.team2.losses}
                       </td>
                     </tr>
                     <tr>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalsFor, comparisonData.team2.goalsFor), 'team1')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalsFor, comparisonData.team2.goalsFor), 'team1')}`}>
                         {comparisonData.team1.goalsFor}
                       </td>
-                      <td className="border border-gray-300 px-4 py-3 text-center font-medium bg-gray-50">
+                      <td className="border border-gray-300 px-2 py-3 text-center font-medium bg-gray-50">
                         Attığı Gol
                       </td>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalsFor, comparisonData.team2.goalsFor), 'team2')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalsFor, comparisonData.team2.goalsFor), 'team2')}`}>
                         {comparisonData.team2.goalsFor}
                       </td>
                     </tr>
                     <tr>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalsAgainst, comparisonData.team2.goalsAgainst, false), 'team1')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalsAgainst, comparisonData.team2.goalsAgainst, false), 'team1')}`}>
                         {comparisonData.team1.goalsAgainst}
                       </td>
-                      <td className="border border-gray-300 px-4 py-3 text-center font-medium">
+                      <td className="border border-gray-300 px-2 py-3 text-center font-medium">
                         Yediği Gol
                       </td>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalsAgainst, comparisonData.team2.goalsAgainst, false), 'team2')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalsAgainst, comparisonData.team2.goalsAgainst, false), 'team2')}`}>
                         {comparisonData.team2.goalsAgainst}
                       </td>
                     </tr>
                     <tr>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalDifference, comparisonData.team2.goalDifference), 'team1')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalDifference, comparisonData.team2.goalDifference), 'team1')}`}>
                         {comparisonData.team1.goalDifference > 0 ? '+' : ''}{comparisonData.team1.goalDifference}
                       </td>
-                      <td className="border border-gray-300 px-4 py-3 text-center font-medium bg-gray-50">
+                      <td className="border border-gray-300 px-2 py-3 text-center font-medium bg-gray-50">
                         Averaj
                       </td>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalDifference, comparisonData.team2.goalDifference), 'team2')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.goalDifference, comparisonData.team2.goalDifference), 'team2')}`}>
                         {comparisonData.team2.goalDifference > 0 ? '+' : ''}{comparisonData.team2.goalDifference}
                       </td>
                     </tr>
                     <tr>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.winPercentage, comparisonData.team2.winPercentage), 'team1')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.winPercentage, comparisonData.team2.winPercentage), 'team1')}`}>
                         %{comparisonData.team1.winPercentage}
                       </td>
-                      <td className="border border-gray-300 px-4 py-3 text-center font-medium">
+                      <td className="border border-gray-300 px-2 py-3 text-center font-medium">
                         Galibiyet Oranı
                       </td>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.winPercentage, comparisonData.team2.winPercentage), 'team2')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.winPercentage, comparisonData.team2.winPercentage), 'team2')}`}>
                         %{comparisonData.team2.winPercentage}
                       </td>
                     </tr>
                     <tr>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.points, comparisonData.team2.points), 'team1')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.points, comparisonData.team2.points), 'team1')}`}>
                         {comparisonData.team1.points}
                       </td>
-                      <td className="border border-gray-300 px-4 py-3 text-center font-medium bg-gray-50">
+                      <td className="border border-gray-300 px-2 py-3 text-center font-medium bg-gray-50">
                         Toplam Puan
                       </td>
-                      <td className={`border border-gray-300 px-4 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.points, comparisonData.team2.points), 'team2')}`}>
+                      <td className={`border border-gray-300 px-2 py-3 text-center ${getStatColor(getBetterTeam(comparisonData.team1.points, comparisonData.team2.points), 'team2')}`}>
                         {comparisonData.team2.points}
                       </td>
                     </tr>
