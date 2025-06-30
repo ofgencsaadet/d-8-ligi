@@ -27,6 +27,22 @@ export const quotes = [
   {
     text: "Milli Görüş hayra motor, şerre fren olmaktır.",
     author: "Necmettin Erbakan"
+  },
+  {
+    text: " Bizler, gelecek seçimler için değil; gelecek nesiller için çalışıyoruz.",
+    author: "Necmettin Erbakan"
+  },
+  {
+    text: " Bütün uyuyanları uyandırmaya bir tek uyanık yeter.",
+    author: "Malcom X"
+  },
+  {
+    text: " Bir çiçekle bahar olmaz; ama her bahar bir çiçekle başlar.",
+    author: "Necmettin Erbakan"
+  },
+  {
+    text: " Haksız bir davada zirve olmaktansa, hak davada zerre olmayı tercih ederiz",
+    author: "Necmettin Erbakan"
   }
 ]
 
