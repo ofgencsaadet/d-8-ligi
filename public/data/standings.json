@@ -2,14 +2,14 @@
   "Ahmet Minguzzi Grubu": [
     {
       "team": "Ajans Of",
-      "played": 2,
-      "won": 1,
+      "played": 3,
+      "won": 2,
       "drawn": 1,
       "lost": 0,
-      "goalsFor": 16,
-      "goalsAgainst": 2,
-      "goalDifference": 14,
-      "points": 4
+      "goalsFor": 19,
+      "goalsAgainst": 3,
+      "goalDifference": 16,
+      "points": 7
     },
     {
       "team": "Çirihtalar",
@@ -24,13 +24,13 @@
     },
     {
       "team": "Kural Kesiciler",
-      "played": 2,
+      "played": 3,
       "won": 1,
       "drawn": 0,
-      "lost": 1,
-      "goalsFor": 24,
-      "goalsAgainst": 9,
-      "goalDifference": 15,
+      "lost": 2,
+      "goalsFor": 25,
+      "goalsAgainst": 12,
+      "goalDifference": 13,
       "points": 3
     },
     {
