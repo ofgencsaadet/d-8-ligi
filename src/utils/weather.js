@@ -62,16 +62,83 @@ const weatherIcons = {
   1282: '⛈️'  // Moderate or heavy snow with thunder
 }
 
+// Özel Türkçe açıklamalar (daha kısa ve anlaşılır)
+const weatherDescriptions = {
+  1000: 'güneşli',
+  1003: 'parçalı bulutlu',
+  1006: 'bulutlu',
+  1009: 'kapalı',
+  1030: 'sisli',
+  1063: 'hafif yağmurlu',
+  1066: 'hafif kar yağışlı',
+  1069: 'karla karışık yağmurlu',
+  1072: 'dondurucu çisenti',
+  1087: 'fırtınalı',
+  1114: 'kar fırtınası',
+  1117: 'tipi',
+  1135: 'yoğun sisli',
+  1147: 'dondurucu sisli',
+  1150: 'hafif çisenli',
+  1153: 'çisenli',
+  1168: 'dondurucu çisenli',
+  1171: 'yoğun dondurucu çisenli',
+  1180: 'yer yer yağmurlu',
+  1183: 'hafif yağmurlu',
+  1186: 'orta şiddette yağmurlu',
+  1189: 'yağmurlu',
+  1192: 'şiddetli yağmurlu',
+  1195: 'çok şiddetli yağmurlu',
+  1198: 'hafif dondurucu yağmurlu',
+  1201: 'dondurucu yağmurlu',
+  1204: 'hafif karla karışık yağmurlu',
+  1207: 'karla karışık yağmurlu',
+  1210: 'yer yer kar yağışlı',
+  1213: 'hafif kar yağışlı',
+  1216: 'orta şiddette kar yağışlı',
+  1219: 'karlı',
+  1222: 'şiddetli kar yağışlı',
+  1225: 'çok şiddetli kar yağışlı',
+  1237: 'dolu',
+  1240: 'sağanak yağmur',
+  1243: 'şiddetli sağanak',
+  1246: 'çok şiddetli sağanak',
+  1249: 'karla karışık sağanak',
+  1252: 'şiddetli karla karışık sağanak',
+  1255: 'kar sağanağı',
+  1258: 'şiddetli kar sağanağı',
+  1261: 'hafif dolu',
+  1264: 'şiddetli dolu',
+  1273: 'gök gürültülü yağmur',
+  1276: 'şiddetli gök gürültülü yağmur',
+  1279: 'gök gürültülü kar',
+  1282: 'şiddetli gök gürültülü kar'
+}
+
 // Maçın 7 gün içinde olup olmadığını kontrol et
 export function isWithinWeek(matchDate) {
   if (!matchDate) return false
   
+  // Sadece tarihleri karşılaştırmak için saatleri sıfırla
   const today = new Date()
-  const oneWeekLater = new Date()
-  oneWeekLater.setDate(today.getDate() + 7)
+  today.setHours(0, 0, 0, 0) // Bugün saat 00:00:00
+  
+  const oneWeekLater = new Date(today)
+  oneWeekLater.setDate(today.getDate() + 7) // 7 gün sonra saat 00:00:00
   
   const [day, month, year] = matchDate.split('.')
   const matchDateObj = new Date(year, month - 1, day)
+  matchDateObj.setHours(0, 0, 0, 0) // Maç günü saat 00:00:00
+  
+  // Debug için console log ekle
+  if (import.meta.env.DEV) {
+    console.log('Tarih kontrolü:', {
+      matchDate,
+      today: today.toISOString().split('T')[0],
+      matchDay: matchDateObj.toISOString().split('T')[0],
+      oneWeekLater: oneWeekLater.toISOString().split('T')[0],
+      isWithinWeek: matchDateObj >= today && matchDateObj <= oneWeekLater
+    })
+  }
   
   return matchDateObj >= today && matchDateObj <= oneWeekLater
 }
@@ -97,13 +164,39 @@ export async function getWeatherForecast() {
 
 // Belirli bir tarih ve saatte hava durumu (WeatherAPI formatı)
 export function getWeatherForDateTime(forecastData, matchDate, matchTime) {
-  if (!forecastData || !matchDate || !forecastData.forecast) return null
+  if (import.meta.env.DEV) {
+    console.log('getWeatherForDateTime çağrıldı:', { matchDate, matchTime, hasForecastData: !!forecastData })
+  }
+  
+  if (!forecastData || !matchDate || !forecastData.forecast) {
+    if (import.meta.env.DEV) {
+      console.log('Eksik veri:', { 
+        hasForecastData: !!forecastData, 
+        hasMatchDate: !!matchDate, 
+        hasForecast: !!forecastData?.forecast 
+      })
+    }
+    return null
+  }
   
   const [day, month, year] = matchDate.split('.')
   const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
   
+  if (import.meta.env.DEV) {
+    console.log('Tarih formatı:', { matchDate, formattedDate })
+  }
+  
   // İlgili günün verisini bul
   const dayForecast = forecastData.forecast.forecastday.find(day => day.date === formattedDate)
+  
+  if (import.meta.env.DEV) {
+    console.log('Gün tahmini bulundu mu:', { 
+      formattedDate, 
+      foundDay: !!dayForecast,
+      availableDates: forecastData.forecast.forecastday.map(d => d.date)
+    })
+  }
+  
   if (!dayForecast) return null
   
   const [hours, minutes] = matchTime ? matchTime.split(':') : ['18', '00']
@@ -128,9 +221,24 @@ export function getWeatherForDateTime(forecastData, matchDate, matchTime) {
   // Eğer saatlik veri yoksa günlük veriyi kullan
   const weatherData = closestHourly || dayForecast.day
   
+  if (import.meta.env.DEV) {
+    console.log('Hava durumu verisi:', {
+      matchHour,
+      hasHourlyData: !!closestHourly,
+      weatherData: weatherData ? {
+        temp: weatherData.temp_c || weatherData.avgtemp_c,
+        condition: weatherData.condition.text,
+        code: weatherData.condition.code
+      } : null
+    })
+  }
+  
+  if (!weatherData) return null
+  
   return {
     temperature: Math.round(weatherData.temp_c || weatherData.avgtemp_c),
-    description: weatherData.condition.text,
+    description: weatherDescriptions[weatherData.condition.code] || weatherData.condition.text || 'Bilinmeyen',
+    originalDescription: weatherData.condition.text, // API'den gelen orijinal açıklama
     icon: weatherIcons[weatherData.condition.code] || '🌤️'
   }
 }

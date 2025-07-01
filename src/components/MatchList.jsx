@@ -13,11 +13,27 @@ function MatchList({ matches, type, onTeamComparison }) {
     if (type === 'upcoming') {
       const hasWeeklyMatches = matches.some(match => isWithinWeek(match.date))
       
+      if (import.meta.env.DEV) {
+        console.log('Hava durumu useEffect:', {
+          type,
+          matchCount: matches.length,
+          hasWeeklyMatches,
+          weeklyMatches: matches.filter(match => isWithinWeek(match.date)).map(m => ({ date: m.date, time: m.time }))
+        })
+      }
+      
       if (hasWeeklyMatches) {
         setWeatherLoading(true)
+        if (import.meta.env.DEV) {
+          console.log('Hava durumu API çağrısı başlatılıyor...')
+        }
+        
         // Gerçek API çağrısı
         getWeatherForecast()
           .then(data => {
+            if (import.meta.env.DEV) {
+              console.log('Hava durumu API yanıtı:', data)
+            }
             setForecastData(data)
           })
           .catch(error => {
@@ -27,23 +43,49 @@ function MatchList({ matches, type, onTeamComparison }) {
           .finally(() => {
             setWeatherLoading(false)
           })
+      } else {
+        if (import.meta.env.DEV) {
+          console.log('7 gün içinde maç yok, hava durumu API çağrısı yapılmıyor')
+        }
       }
     }
   }, [matches, type])
 
   // Belirli bir maç için hava durumu al
   const getMatchWeather = (match) => {
+    if (import.meta.env.DEV) {
+      console.log('getMatchWeather çağrıldı:', { 
+        matchDate: match.date, 
+        matchTime: match.time,
+        type, 
+        isWithinWeek: isWithinWeek(match.date),
+        hasForecastData: !!forecastData 
+      })
+    }
+    
     if (type !== 'upcoming' || !isWithinWeek(match.date)) {
+      if (import.meta.env.DEV) {
+        console.log('Hava durumu gösterilmiyor - sebep:', {
+          isUpcoming: type === 'upcoming',
+          isWithinWeek: isWithinWeek(match.date)
+        })
+      }
       return null
     }
 
     // Gerçek API verisi var mı?
     if (forecastData) {
       const realWeather = getWeatherForDateTime(forecastData, match.date, match.time)
+      if (import.meta.env.DEV) {
+        console.log('API hava durumu:', realWeather)
+      }
       if (realWeather) return realWeather
     }
 
     // API yoksa mock veri göster
+    if (import.meta.env.DEV) {
+      console.log('Mock hava durumu kullanılıyor')
+    }
     return getMockWeatherData()
   }
 
@@ -216,7 +258,12 @@ function MatchList({ matches, type, onTeamComparison }) {
                             <div className="mt-2 flex items-center space-x-1 text-xs">
                               <span>{weather.icon}</span>
                               <span className="font-medium text-blue-600">{weather.temperature}°C</span>
-                              <span className="text-gray-500 hidden sm:inline">{weather.description}</span>
+                              <span 
+                                className="text-gray-500 hidden sm:inline cursor-help" 
+                                title={weather.originalDescription ? `API: ${weather.originalDescription}` : weather.description}
+                              >
+                                {weather.description}
+                              </span>
                             </div>
                           ) : null
                         })()}
@@ -336,7 +383,12 @@ function MatchList({ matches, type, onTeamComparison }) {
                             <div className="mt-2 flex items-center space-x-1 text-xs">
                               <span>{weather.icon}</span>
                               <span className="font-medium text-blue-600">{weather.temperature}°C</span>
-                              <span className="text-gray-500 hidden sm:inline">{weather.description}</span>
+                              <span 
+                                className="text-gray-500 hidden sm:inline cursor-help" 
+                                title={weather.originalDescription ? `API: ${weather.originalDescription}` : weather.description}
+                              >
+                                {weather.description}
+                              </span>
                             </div>
                           ) : null
                         })()}
