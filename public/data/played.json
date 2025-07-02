@@ -138,5 +138,25 @@
     "score1": 3,
     "score2": 3,
     "videoLink": "https://youtu.be/rbFAYTWC6z4"
+  },
+  {
+    "date": "02.07.2025",
+    "time": "21:00",
+    "group": "Eren Bülbül Grubu",
+    "team1": "Araklı 1961 Spor",
+    "team2": "Of 1461",
+    "score1": 5,
+    "score2": 4,
+    "videoLink": null
+  },
+  {
+    "date": "02.07.2025",
+    "time": "22:00",
+    "group": "Ahmet Minguzzi Grubu",
+    "team1": "Ravager",
+    "team2": "Çirihtalar",
+    "score1": 0,
+    "score2": 3,
+    "videoLink": null
   }
 ]
