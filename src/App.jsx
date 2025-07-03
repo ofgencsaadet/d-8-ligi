@@ -17,6 +17,46 @@ function App() {
   const [initialTeams, setInitialTeams] = useState(null) // Otomatik takım seçimi için
   const [showHeadToHeadModal, setShowHeadToHeadModal] = useState(false) // Modal kontrolü
 
+  // Çeyrek finale gidecek takımları hesapla
+  const calculateQualifiedTeams = (standings) => {
+    if (!standings) return new Set()
+    
+    const qualifiedTeams = new Set()
+    const thirdPlaceTeams = []
+    
+    // Her gruptan ilk 2 takımı ekle
+    Object.entries(standings).forEach(([groupName, teams]) => {
+      if (teams.length >= 2) {
+        qualifiedTeams.add(teams[0].team) // 1. takım
+        qualifiedTeams.add(teams[1].team) // 2. takım
+      }
+      
+      // 3. takımı topla (eğer varsa)
+      if (teams.length >= 3) {
+        thirdPlaceTeams.push({
+          team: teams[2].team,
+          goalDifference: teams[2].goalDifference,
+          points: teams[2].points,
+          goalsFor: teams[2].goalsFor
+        })
+      }
+    })
+    
+    // 3. takımları averaja göre sırala (önce puan, sonra averaj, sonra atılan gol)
+    thirdPlaceTeams.sort((a, b) => {
+      if (a.points !== b.points) return b.points - a.points
+      if (a.goalDifference !== b.goalDifference) return b.goalDifference - a.goalDifference
+      return b.goalsFor - a.goalsFor
+    })
+    
+    // En iyi 2 tane 3. takımı ekle
+    thirdPlaceTeams.slice(0, 2).forEach(team => {
+      qualifiedTeams.add(team.team)
+    })
+    
+    return qualifiedTeams
+  }
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -75,6 +115,9 @@ function App() {
     setShowHeadToHeadModal(true)
   }
 
+  // Çeyrek finale gidecek takımları hesapla
+  const qualifiedTeams = calculateQualifiedTeams(standings)
+
   if (loading) {
     return <LoadingSpinner />
   }
@@ -125,6 +168,7 @@ function App() {
                     key={groupName}
                     groupName={groupName}
                     teams={teams}
+                    qualifiedTeams={qualifiedTeams}
                   />
                 ))}
               </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import ShareModal from './ShareModal'
 
-function StandingsTable({ groupName, teams }) {
+function StandingsTable({ groupName, teams, qualifiedTeams = new Set() }) {
   const [shareModalVisible, setShareModalVisible] = useState(false)
 
   const getPositionIcon = (position) => {
@@ -21,6 +21,11 @@ function StandingsTable({ groupName, teams }) {
     groupName,
     teams: teams.slice(0, 4), // İlk 4 takım
     date: new Date().toLocaleDateString('tr-TR')
+  }
+
+  // Çeyrek finale gidip gitmediğini kontrol et
+  const isQualified = (teamName) => {
+    return qualifiedTeams.has(teamName)
   }
 
   return (
@@ -77,54 +82,64 @@ function StandingsTable({ groupName, teams }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {teams.map((team, index) => (
-              <tr key={team.team} className="hover:bg-gray-50 transition-colors">
-                <td className="px-2 py-4 whitespace-nowrap text-sm w-10 text-center">
-                  <span className="text-sm font-medium text-gray-700">
-                    {getPositionIcon(index + 1)}
-                  </span>
-                </td>
-                <td className="px-1 py-4 w-20">
-                  <div className="text-xs font-medium text-gray-900 truncate" title={team.team}>
-                    {team.team}
-                  </div>
-                </td>
-                <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                  {team.played}
-                </td>
-                <td className="px-1 py-4 whitespace-nowrap text-sm text-green-600 text-center font-medium">
-                  {team.won}
-                </td>
-                <td className="px-1 py-4 whitespace-nowrap text-sm text-yellow-600 text-center font-medium">
-                  {team.drawn}
-                </td>
-                <td className="px-1 py-4 whitespace-nowrap text-sm text-red-600 text-center font-medium">
-                  {team.lost}
-                </td>
-                <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                  {team.goalsFor}
-                </td>
-                <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                  {team.goalsAgainst}
-                </td>
-                <td className="px-1 py-4 whitespace-nowrap text-sm text-center">
-                  <span className={`font-medium ${
-                    team.goalDifference > 0 
-                      ? 'text-green-600' 
-                      : team.goalDifference < 0 
-                        ? 'text-red-600' 
-                        : 'text-gray-500'
-                  }`}>
-                    {team.goalDifference > 0 ? '+' : ''}{team.goalDifference}
-                  </span>
-                </td>
-                <td className="px-1 py-4 whitespace-nowrap text-center">
-                  <span className="inline-flex items-center justify-center px-2 py-1 rounded-full text-sm font-bold bg-blue-100 text-blue-800">
-                    {team.points}
-                  </span>
-                </td>
-              </tr>
-            ))}
+            {teams.map((team, index) => {
+              const qualified = isQualified(team.team)
+              return (
+                <tr key={team.team} className={`transition-colors ${
+                  qualified 
+                    ? 'bg-green-100 hover:bg-green-200 border-l-4 border-green-500' 
+                    : 'hover:bg-gray-50'
+                }`}>
+                  <td className="px-2 py-4 whitespace-nowrap text-sm w-10 text-center">
+                    <span className="text-sm font-medium text-gray-700">
+                      {getPositionIcon(index + 1)}
+                    </span>
+                  </td>
+                  <td className="px-1 py-4 w-20">
+                    <div className={`text-xs font-medium truncate ${
+                      qualified ? 'text-green-700 font-bold' : 'text-gray-900'
+                    }`} title={team.team}>
+                      {team.team}
+                      {qualified && <span className="ml-1 text-green-600 text-base">🏆</span>}
+                    </div>
+                  </td>
+                  <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                    {team.played}
+                  </td>
+                  <td className="px-1 py-4 whitespace-nowrap text-sm text-green-600 text-center font-medium">
+                    {team.won}
+                  </td>
+                  <td className="px-1 py-4 whitespace-nowrap text-sm text-yellow-600 text-center font-medium">
+                    {team.drawn}
+                  </td>
+                  <td className="px-1 py-4 whitespace-nowrap text-sm text-red-600 text-center font-medium">
+                    {team.lost}
+                  </td>
+                  <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                    {team.goalsFor}
+                  </td>
+                  <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                    {team.goalsAgainst}
+                  </td>
+                  <td className="px-1 py-4 whitespace-nowrap text-sm text-center">
+                    <span className={`font-medium ${
+                      team.goalDifference > 0 
+                        ? 'text-green-600' 
+                        : team.goalDifference < 0 
+                          ? 'text-red-600' 
+                          : 'text-gray-500'
+                    }`}>
+                      {team.goalDifference > 0 ? '+' : ''}{team.goalDifference}
+                    </span>
+                  </td>
+                  <td className="px-1 py-4 whitespace-nowrap text-center">
+                    <span className="inline-flex items-center justify-center px-2 py-1 rounded-full text-sm font-bold bg-blue-100 text-blue-800">
+                      {team.points}
+                    </span>
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
@@ -139,6 +154,9 @@ function StandingsTable({ groupName, teams }) {
           <span><strong>Y:</strong> Yenilen</span>
           <span><strong>AV:</strong> Averaj</span>
           <span><strong>P:</strong> Puan</span>
+        </div>
+        <div className="text-center mt-2">
+          <span className="text-green-600 font-medium">🏆 Çeyrek finale giden takımlar</span>
         </div>
       </div>
 
