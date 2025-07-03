@@ -147,7 +147,7 @@
     "team2": "Of 1461",
     "score1": 5,
     "score2": 4,
-    "videoLink": null
+    "videoLink": "https://youtu.be/LJGmM-PJz-g"
   },
   {
     "date": "02.07.2025",
@@ -157,6 +157,26 @@
     "team2": "Çirihtalar",
     "score1": 0,
     "score2": 3,
+    "videoLink": null
+  },
+  {
+    "date": "03.07.2025",
+    "time": "21:00",
+    "group": "Narin Güran Grubu",
+    "team1": "Of FK",
+    "team2": "Ofside",
+    "score1": 17,
+    "score2": 3,
+    "videoLink": null
+  },
+  {
+    "date": "03.07.2025",
+    "time": "22:00",
+    "group": "Eren Bülbül Grubu",
+    "team1": "Armedospor",
+    "team2": "Hubuş FK",
+    "score1": 3,
+    "score2": 7,
     "videoLink": null
   }
 ]
