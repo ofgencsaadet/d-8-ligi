@@ -90,54 +90,54 @@ function StandingsTable({ groupName, teams, qualifiedTeams = new Set() }) {
                     ? 'bg-green-100 hover:bg-green-200 border-l-4 border-green-500' 
                     : 'hover:bg-gray-50'
                 }`}>
-                  <td className="px-2 py-4 whitespace-nowrap text-sm w-10 text-center">
-                    <span className="text-sm font-medium text-gray-700">
-                      {getPositionIcon(index + 1)}
-                    </span>
-                  </td>
-                  <td className="px-1 py-4 w-20">
+                <td className="px-2 py-4 whitespace-nowrap text-sm w-10 text-center">
+                  <span className="text-sm font-medium text-gray-700">
+                    {getPositionIcon(index + 1)}
+                  </span>
+                </td>
+                <td className="px-1 py-4 w-20">
                     <div className={`text-xs font-medium truncate ${
                       qualified ? 'text-green-700 font-bold' : 'text-gray-900'
                     }`} title={team.team}>
-                      {team.team}
+                    {team.team}
                       {qualified && <span className="ml-1 text-green-600 text-base">🏆</span>}
-                    </div>
-                  </td>
-                  <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                    {team.played}
-                  </td>
-                  <td className="px-1 py-4 whitespace-nowrap text-sm text-green-600 text-center font-medium">
-                    {team.won}
-                  </td>
-                  <td className="px-1 py-4 whitespace-nowrap text-sm text-yellow-600 text-center font-medium">
-                    {team.drawn}
-                  </td>
-                  <td className="px-1 py-4 whitespace-nowrap text-sm text-red-600 text-center font-medium">
-                    {team.lost}
-                  </td>
-                  <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                    {team.goalsFor}
-                  </td>
-                  <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                    {team.goalsAgainst}
-                  </td>
-                  <td className="px-1 py-4 whitespace-nowrap text-sm text-center">
-                    <span className={`font-medium ${
-                      team.goalDifference > 0 
-                        ? 'text-green-600' 
-                        : team.goalDifference < 0 
-                          ? 'text-red-600' 
-                          : 'text-gray-500'
-                    }`}>
-                      {team.goalDifference > 0 ? '+' : ''}{team.goalDifference}
-                    </span>
-                  </td>
-                  <td className="px-1 py-4 whitespace-nowrap text-center">
-                    <span className="inline-flex items-center justify-center px-2 py-1 rounded-full text-sm font-bold bg-blue-100 text-blue-800">
-                      {team.points}
-                    </span>
-                  </td>
-                </tr>
+                  </div>
+                </td>
+                <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                  {team.played}
+                </td>
+                <td className="px-1 py-4 whitespace-nowrap text-sm text-green-600 text-center font-medium">
+                  {team.won}
+                </td>
+                <td className="px-1 py-4 whitespace-nowrap text-sm text-yellow-600 text-center font-medium">
+                  {team.drawn}
+                </td>
+                <td className="px-1 py-4 whitespace-nowrap text-sm text-red-600 text-center font-medium">
+                  {team.lost}
+                </td>
+                <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                  {team.goalsFor}
+                </td>
+                <td className="px-1 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                  {team.goalsAgainst}
+                </td>
+                <td className="px-1 py-4 whitespace-nowrap text-sm text-center">
+                  <span className={`font-medium ${
+                    team.goalDifference > 0 
+                      ? 'text-green-600' 
+                      : team.goalDifference < 0 
+                        ? 'text-red-600' 
+                        : 'text-gray-500'
+                  }`}>
+                    {team.goalDifference > 0 ? '+' : ''}{team.goalDifference}
+                  </span>
+                </td>
+                <td className="px-1 py-4 whitespace-nowrap text-center">
+                  <span className="inline-flex items-center justify-center px-2 py-1 rounded-full text-sm font-bold bg-blue-100 text-blue-800">
+                    {team.points}
+                  </span>
+                </td>
+              </tr>
               )
             })}
           </tbody>

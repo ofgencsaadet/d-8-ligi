@@ -243,15 +243,31 @@ export function getWeatherForDateTime(forecastData, matchDate, matchTime) {
   }
 }
 
-// Mock veri (API key olmadığında fallback)
-export function getMockWeatherData() {
+// Mock veri (API key olmadığında fallback) - Deterministik versiyon
+export function getMockWeatherData(matchDate, matchTime) {
   const mockWeathers = [
     { temperature: 22, description: 'parçalı bulutlu', icon: '⛅' },
     { temperature: 18, description: 'hafif yağmurlu', icon: '🌦️' },
     { temperature: 25, description: 'güneşli', icon: '☀️' },
     { temperature: 20, description: 'bulutlu', icon: '☁️' },
-    { temperature: 16, description: 'yağmurlu', icon: '🌧️' }
+    { temperature: 16, description: 'yağmurlu', icon: '🌧️' },
+    { temperature: 23, description: 'güneşli', icon: '☀️' },
+    { temperature: 19, description: 'sisli', icon: '🌫️' },
+    { temperature: 21, description: 'parçalı bulutlu', icon: '⛅' }
   ]
   
-  return mockWeathers[Math.floor(Math.random() * mockWeathers.length)]
+  // Eğer tarih ve saat verilmişse, bunları kullanarak deterministik bir indeks oluştur
+  if (matchDate && matchTime) {
+    // Basit hash fonksiyonu - aynı tarih/saat için her zaman aynı sonucu verir
+    const combined = `${matchDate}-${matchTime}`
+    let hash = 0
+    for (let i = 0; i < combined.length; i++) {
+      hash = ((hash << 5) - hash + combined.charCodeAt(i)) & 0xffffffff
+    }
+    const index = Math.abs(hash) % mockWeathers.length
+    return mockWeathers[index]
+  }
+  
+  // Eğer tarih/saat yoksa varsayılan güneşli hava
+  return mockWeathers[2] // güneşli, 25°C
 }

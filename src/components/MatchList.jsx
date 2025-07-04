@@ -53,40 +53,39 @@ function MatchList({ matches, type, onTeamComparison }) {
 
   // Belirli bir maç için hava durumu al
   const getMatchWeather = (match) => {
-    if (import.meta.env.DEV) {
-      console.log('getMatchWeather çağrıldı:', { 
-        matchDate: match.date, 
-        matchTime: match.time,
-        type, 
-        isWithinWeek: isWithinWeek(match.date),
-        hasForecastData: !!forecastData 
-      })
-    }
-    
-    if (type !== 'upcoming' || !isWithinWeek(match.date)) {
+    if (!match.date || !isWithinWeek(match.date)) {
       if (import.meta.env.DEV) {
-        console.log('Hava durumu gösterilmiyor - sebep:', {
-          isUpcoming: type === 'upcoming',
-          isWithinWeek: isWithinWeek(match.date)
+        console.log('Hava durumu gösterilmiyor - tarih yok veya 7 gün dışında:', {
+          hasDate: !!match.date,
+          withinWeek: match.date ? isWithinWeek(match.date) : false
         })
       }
       return null
     }
-
-    // Gerçek API verisi var mı?
-    if (forecastData) {
-      const realWeather = getWeatherForDateTime(forecastData, match.date, match.time)
-      if (import.meta.env.DEV) {
-        console.log('API hava durumu:', realWeather)
-      }
-      if (realWeather) return realWeather
-    }
-
-    // API yoksa mock veri göster
+    
     if (import.meta.env.DEV) {
-      console.log('Mock hava durumu kullanılıyor')
+      console.log('getMatchWeather çağrıldı:', {
+        matchDate: match.date,
+        matchTime: match.time,
+        hasForecastData: !!forecastData
+      })
     }
-    return getMockWeatherData()
+    
+    // Gerçek API verisi varsa onu kullan
+    const realWeather = getWeatherForDateTime(forecastData, match.date, match.time)
+    
+    if (import.meta.env.DEV) {
+      console.log('API hava durumu:', realWeather)
+    }
+    
+    if (realWeather) return realWeather
+    
+    if (import.meta.env.DEV) {
+      console.log('API verisi yok, mock veri kullanılıyor')
+    }
+    
+    // API verisi yoksa deterministik mock data kullan
+    return getMockWeatherData(match.date, match.time)
   }
 
   // Paylaşım modal'ını aç

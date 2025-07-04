@@ -5,11 +5,13 @@ import MatchList from './components/MatchList'
 import LoadingSpinner from './components/LoadingSpinner'
 import QuoteModal from './components/QuoteModal'
 import HeadToHead from './components/HeadToHead'
+import TournamentBracket from './components/TournamentBracket'
 
 function App() {
   const [standings, setStandings] = useState(null)
   const [playedMatches, setPlayedMatches] = useState([])
   const [upcomingMatches, setUpcomingMatches] = useState([])
+  const [playoffData, setPlayoffData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [showQuoteModal, setShowQuoteModal] = useState(true)
@@ -65,25 +67,28 @@ function App() {
         // Paralel olarak tüm JSON dosyalarını yükle
         const basePath = import.meta.env.PROD ? '/d-8-ligi' : ''
         const timestamp = new Date().getTime()
-        const [standingsRes, playedRes, upcomingRes] = await Promise.all([
+        const [standingsRes, playedRes, upcomingRes, playoffRes] = await Promise.all([
           fetch(`${basePath}/data/standings.json?v=${timestamp}`),
           fetch(`${basePath}/data/played.json?v=${timestamp}`),
-          fetch(`${basePath}/data/upcoming.json?v=${timestamp}`)
+          fetch(`${basePath}/data/upcoming.json?v=${timestamp}`),
+          fetch(`${basePath}/data/playoff.json?v=${timestamp}`).catch(() => null)
         ])
 
         if (!standingsRes.ok || !playedRes.ok || !upcomingRes.ok) {
           throw new Error('Veri yükleme hatası')
         }
 
-        const [standingsData, playedData, upcomingData] = await Promise.all([
+        const [standingsData, playedData, upcomingData, playoffDataResult] = await Promise.all([
           standingsRes.json(),
           playedRes.json(),
-          upcomingRes.json()
+          upcomingRes.json(),
+          playoffRes?.ok ? playoffRes.json() : null
         ])
 
         setStandings(standingsData)
         setPlayedMatches(playedData)
         setUpcomingMatches(upcomingData)
+        setPlayoffData(playoffDataResult)
       } catch (err) {
         setError('Veriler yüklenirken hata oluştu: ' + err.message)
         console.error('Veri yükleme hatası:', err)
@@ -156,6 +161,11 @@ function App() {
 
         {/* Varsayılan görünüm */}
         <>
+          {/* Tournament Bracket */}
+          {playoffData && playoffData.quarterFinals && playoffData.quarterFinals.length > 0 && (
+            <TournamentBracket data={playoffData} />
+          )}
+
           {/* Puan Tabloları */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
@@ -224,7 +234,7 @@ function App() {
                 </button>
               </div>
               <div className="p-6">
-                <HeadToHead matches={playedMatches} initialTeams={initialTeams} />
+                <HeadToHead matches={playedMatches} playoffData={playoffData} initialTeams={initialTeams} />
               </div>
             </div>
           </div>

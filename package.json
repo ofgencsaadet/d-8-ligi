@@ -6,10 +6,12 @@
   "homepage": "https://ofgencsaadet.github.io/d-8-ligi",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/copy-data.js && vite build",
+    "build": "node scripts/copy-data.js && node scripts/process-playoff.js && vite build",
     "preview": "vite preview",
     "process-data": "node scripts/process-excel.js",
     "create-template": "node scripts/create-excel-template.js",
+    "process-playoff": "node scripts/process-playoff.js",
+    "create-playoff-template": "node scripts/create-playoff-template.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
