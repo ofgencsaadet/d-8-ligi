@@ -2,8 +2,8 @@
   "quarterFinals": [
     {
       "matchType": "Çeyrek Final 1",
-      "team1": "Genç Saadet OF",
-      "team2": "Genç Saadet OF",
+      "team1": "61.Alay",
+      "team2": "Ajans Of",
       "score1": null,
       "score2": null,
       "date": "07.07.2025",
@@ -14,8 +14,8 @@
     },
     {
       "matchType": "Çeyrek Final 2",
-      "team1": "Genç Saadet OF",
-      "team2": "Genç Saadet OF",
+      "team1": "Fortuna United",
+      "team2": "Kural Kesiciler",
       "score1": null,
       "score2": null,
       "date": "07.07.2025",
@@ -26,8 +26,8 @@
     },
     {
       "matchType": "Çeyrek Final 3",
-      "team1": "Genç Saadet OF",
-      "team2": "Genç Saadet OF",
+      "team1": "Çirihtalar",
+      "team2": "Araklı 1961 Spor",
       "score1": null,
       "score2": null,
       "date": "09.07.2025",
@@ -38,8 +38,8 @@
     },
     {
       "matchType": "Çeyrek Final 4",
-      "team1": "Genç Saadet OF",
-      "team2": "Genç Saadet OF",
+      "team1": "Hubuş FK",
+      "team2": "Of FK",
       "score1": null,
       "score2": null,
       "date": "09.07.2025",
@@ -49,55 +49,8 @@
       "winner": null
     }
   ],
-  "semiFinals": [
-    {
-      "matchType": "Yarı Final 1",
-      "team1": "Genç Saadet OF",
-      "team2": "Genç Saadet OF",
-      "score1": null,
-      "score2": null,
-      "date": "14.07.2025",
-      "time": "21:00",
-      "link": null,
-      "played": false,
-      "winner": null
-    },
-    {
-      "matchType": "Yarı Final 2",
-      "team1": "Genç Saadet OF",
-      "team2": "Genç Saadet OF",
-      "score1": null,
-      "score2": null,
-      "date": "14.07.2025",
-      "time": "22:00",
-      "link": null,
-      "played": false,
-      "winner": null
-    }
-  ],
-  "final": {
-    "matchType": "Final",
-    "team1": "Genç Saadet OF",
-    "team2": "Genç Saadet OF",
-    "score1": null,
-    "score2": null,
-    "date": "19.07.2025",
-    "time": "22:00",
-    "link": null,
-    "played": false,
-    "winner": null
-  },
-  "thirdPlace": {
-    "matchType": "3. lük Maçı",
-    "team1": "Genç Saadet OF",
-    "team2": "Genç Saadet OF",
-    "score1": null,
-    "score2": null,
-    "date": "19.07.2025",
-    "time": "21:00",
-    "link": null,
-    "played": false,
-    "winner": null
-  },
+  "semiFinals": [],
+  "final": null,
+  "thirdPlace": null,
   "champion": null
 }
