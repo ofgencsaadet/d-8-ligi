@@ -4,25 +4,25 @@
       "matchType": "Çeyrek Final 1",
       "team1": "61.Alay",
       "team2": "Ajans Of",
-      "score1": null,
-      "score2": null,
+      "score1": 1,
+      "score2": 6,
       "date": "07.07.2025",
       "time": "21:00",
       "link": null,
-      "played": false,
-      "winner": null
+      "played": true,
+      "winner": "Ajans Of"
     },
     {
       "matchType": "Çeyrek Final 2",
       "team1": "Fortuna United",
       "team2": "Kural Kesiciler",
-      "score1": null,
-      "score2": null,
+      "score1": 6,
+      "score2": 4,
       "date": "07.07.2025",
       "time": "22:00",
       "link": null,
-      "played": false,
-      "winner": null
+      "played": true,
+      "winner": "Fortuna United"
     },
     {
       "matchType": "Çeyrek Final 3",
@@ -49,7 +49,20 @@
       "winner": null
     }
   ],
-  "semiFinals": [],
+  "semiFinals": [
+    {
+      "matchType": "Yarı Final 1",
+      "team1": "Ajans Of",
+      "team2": "Fortuna United",
+      "score1": null,
+      "score2": null,
+      "date": "14.07.2025",
+      "time": "21:00",
+      "link": null,
+      "played": false,
+      "winner": null
+    }
+  ],
   "final": null,
   "thirdPlace": null,
   "champion": null
