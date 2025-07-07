@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// Playoff Excel dosyasını işle
+// Kupa Yolu Excel dosyasını işle
 async function processPlayoffExcel() {
   const inputPath = path.join(__dirname, '..', 'data', 'playoff-sonuclari.xlsx')
   
@@ -193,7 +193,7 @@ async function processPlayoffExcel() {
       'utf8'
     )
 
-    console.log('✅ Playoff verileri işlendi:')
+    console.log('✅ Kupa Yolu verileri işlendi:')
     console.log(`   - Çeyrek Final: ${playoff.quarterFinals.length} maç`)
     console.log(`   - Yarı Final: ${playoff.semiFinals.length} maç`)
     console.log(`   - Final: ${playoff.final ? '1 maç' : 'Henüz yok'}`)
@@ -201,7 +201,7 @@ async function processPlayoffExcel() {
     console.log(`   - Şampiyon: ${playoff.champion || 'Henüz yok'}`)
 
   } catch (error) {
-    console.error('❌ Playoff Excel işleme hatası:', error.message)
+    console.error('❌ Kupa Yolu Excel işleme hatası:', error.message)
   }
 }
 

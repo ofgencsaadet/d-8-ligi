@@ -26,7 +26,8 @@ function HeadToHead({ matches, playoffData, initialTeams }) {
           playoffMatches.push({
             ...match,
             isPlayoff: true,
-            round: 'Çeyrek Final'
+            round: 'Çeyrek Final',
+            group: 'Kupa Yolu - Çeyrek Final'
           })
         }
       })
@@ -39,7 +40,8 @@ function HeadToHead({ matches, playoffData, initialTeams }) {
           playoffMatches.push({
             ...match,
             isPlayoff: true,
-            round: 'Yarı Final'
+            round: 'Yarı Final',
+            group: 'Kupa Yolu - Yarı Final'
           })
         }
       })
@@ -50,7 +52,8 @@ function HeadToHead({ matches, playoffData, initialTeams }) {
       playoffMatches.push({
         ...playoffData.final,
         isPlayoff: true,
-        round: 'Final'
+        round: 'Final',
+        group: 'Kupa Yolu - Final'
       })
     }
     
@@ -59,7 +62,8 @@ function HeadToHead({ matches, playoffData, initialTeams }) {
       playoffMatches.push({
         ...playoffData.thirdPlace,
         isPlayoff: true,
-        round: '3. lük Maçı'
+        round: '3. lük Maçı',
+        group: 'Kupa Yolu - 3. lük Maçı'
       })
     }
     
@@ -284,9 +288,9 @@ function HeadToHead({ matches, playoffData, initialTeams }) {
           <div className="space-y-6">
             {/* Aktif sekme bilgisi */}
             <div className="text-center text-sm text-gray-600 bg-blue-50 p-2 rounded">
-              {activeTab === 'all' && '📊 Tüm maçların (lig + playoff) istatistikleri gösteriliyor'}
-              {activeTab === 'league' && '🏟️ Sadece lig maçlarının istatistikleri gösteriliyor'}
-              {activeTab === 'playoff' && '🏆 Sadece playoff maçlarının istatistikleri gösteriliyor'}
+              {activeTab === 'all' && '📊 Tüm maçların (Lig + Kupa Yolu) istatistikleri gösteriliyor'}
+              {activeTab === 'league' && '🏟️ Sadece Lig maçlarının istatistikleri gösteriliyor'}
+              {activeTab === 'playoff' && '🏆 Sadece Kupa Yolu maçlarının istatistikleri gösteriliyor'}
             </div>
 
             {/* Genel İstatistikler Karşılaştırması */}
@@ -447,7 +451,7 @@ function HeadToHead({ matches, playoffData, initialTeams }) {
                           const leagueMatches = comparisonData.headToHead.matches.filter(m => !m.isPlayoff).length
                           const playoffMatches = comparisonData.headToHead.matches.filter(m => m.isPlayoff).length
                           if (leagueMatches > 0 && playoffMatches > 0) {
-                            return ` (${leagueMatches} lig, ${playoffMatches} playoff)`
+                          return ` (${leagueMatches} lig, ${playoffMatches} kupa yolu)`
                           }
                           return ''
                         })()}

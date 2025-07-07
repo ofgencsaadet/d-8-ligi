@@ -62,7 +62,7 @@ export function createPlayoffTemplate() {
   const outputPath = path.join(outputDir, 'playoff-template.xlsx')
   XLSX.writeFile(workbook, outputPath)
 
-  console.log('✅ Playoff template oluşturuldu:', outputPath)
+  console.log('✅ Kupa Yolu template oluşturuldu:', outputPath)
   return outputPath
 }
 

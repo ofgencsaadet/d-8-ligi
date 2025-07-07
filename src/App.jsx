@@ -163,7 +163,10 @@ function App() {
         <>
           {/* Tournament Bracket */}
           {playoffData && playoffData.quarterFinals && playoffData.quarterFinals.length > 0 && (
-            <TournamentBracket data={playoffData} />
+            <TournamentBracket 
+              data={playoffData} 
+              onTeamComparison={handleTeamComparison}
+            />
           )}
 
           {/* Puan Tabloları */}
@@ -185,7 +188,8 @@ function App() {
             )}
           </section>
 
-          {/* Oynanacak Maçlar */}
+          {/* Oynanacak Maçlar - Sadece maç varsa göster */}
+          {upcomingMatches.length > 0 && (
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
               📅 Oynanacak Maçlar
@@ -196,6 +200,7 @@ function App() {
               onTeamComparison={handleTeamComparison}
             />
           </section>
+          )}
 
           {/* Oynanmış Maçlar */}
           <section className="mb-12">
