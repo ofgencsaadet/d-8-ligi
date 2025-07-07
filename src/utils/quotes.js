@@ -41,8 +41,16 @@ export const quotes = [
     author: "Necmettin Erbakan"
   },
   {
-    text: "Haksız bir davada zirve olmaktansa, hak davada zerre olmayı tercih ederiz",
+    text: "Haksız bir davada zirve olmaktansa, hak davada zerre olmayı tercih ederiz.",
     author: "Necmettin Erbakan"
+  },
+  {
+    text: "Gençler, Ümmetin ve ülkenin en büyük sermayesidir.",
+    author: "Necmettin Erbakan"
+  },
+  {
+    text: "Zulme rıza göstermek, zulmün ortağı olmaktır.",
+    author: "Abdulaziz Kıranşal"
   }
 ]
 
