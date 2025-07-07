@@ -322,17 +322,18 @@ function TournamentBracket({ data, onTeamComparison }) {
         
         {/* Tarih - sadece normal ve large size için */}
         {(size === 'normal' || size === 'large') && match.date && (
-          <div className="text-xs text-gray-500 px-2 py-1 mt-1 bg-gray-50 rounded text-center">
-            <div className="flex items-center justify-center gap-2">
-              <span>{match.date} {match.time && `${match.time}`}</span>
+          <div className="text-xs text-gray-500 px-3 py-1 mt-1 bg-gray-50 rounded text-center">
+            <div className="flex items-center justify-center gap-1 flex-wrap">
+              <span className="text-xs">📅 {match.date}</span>
+              {match.time && <span className="text-xs">🕒 {match.time}</span>}
               
               {/* Hava durumu */}
               {(() => {
                 const weather = getMatchWeather(match)
                 return weather ? (
                   <div className="flex items-center gap-1">
-                    <span>{weather.icon}</span>
-                    <span className="font-medium text-blue-600">{weather.temperature}°C</span>
+                    <span className="text-xs">{weather.icon}</span>
+                    <span className="font-medium text-blue-600 text-xs">{weather.temperature}°C</span>
                   </div>
                 ) : null
               })()}
