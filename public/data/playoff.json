@@ -6,11 +6,15 @@
       "team2": "Ajans Of",
       "score1": 1,
       "score2": 6,
+      "penalty1": null,
+      "penalty2": null,
+      "hasPenalty": false,
       "date": "07.07.2025",
       "time": "21:00",
-      "link": null,
+      "link": "https://youtu.be/18YMqpxe20g",
       "played": true,
-      "winner": "Ajans Of"
+      "winner": "Ajans Of",
+      "matchResult": "normal"
     },
     {
       "matchType": "Çeyrek Final 2",
@@ -18,11 +22,15 @@
       "team2": "Kural Kesiciler",
       "score1": 6,
       "score2": 4,
+      "penalty1": null,
+      "penalty2": null,
+      "hasPenalty": false,
       "date": "07.07.2025",
       "time": "22:00",
-      "link": null,
+      "link": "https://youtu.be/pssuvQr70gs",
       "played": true,
-      "winner": "Fortuna United"
+      "winner": "Fortuna United",
+      "matchResult": "normal"
     },
     {
       "matchType": "Çeyrek Final 3",
@@ -30,23 +38,31 @@
       "team2": "Araklı 1961 Spor",
       "score1": 1,
       "score2": 5,
+      "penalty1": null,
+      "penalty2": null,
+      "hasPenalty": false,
       "date": "09.07.2025",
       "time": "21:00",
       "link": null,
       "played": true,
-      "winner": "Araklı 1961 Spor"
+      "winner": "Araklı 1961 Spor",
+      "matchResult": "normal"
     },
     {
       "matchType": "Çeyrek Final 4",
       "team1": "Hubuş FK",
       "team2": "Of FK",
-      "score1": null,
-      "score2": null,
+      "score1": 2,
+      "score2": 2,
+      "penalty1": 3,
+      "penalty2": 2,
+      "hasPenalty": true,
       "date": "09.07.2025",
       "time": "22:00",
       "link": null,
-      "played": false,
-      "winner": null
+      "played": true,
+      "winner": "Hubuş FK",
+      "matchResult": "penalty"
     }
   ],
   "semiFinals": [
@@ -56,11 +72,31 @@
       "team2": "Fortuna United",
       "score1": null,
       "score2": null,
+      "penalty1": null,
+      "penalty2": null,
+      "hasPenalty": false,
       "date": "14.07.2025",
       "time": "21:00",
       "link": null,
       "played": false,
-      "winner": null
+      "winner": null,
+      "matchResult": "normal"
+    },
+    {
+      "matchType": "Yarı Final 2",
+      "team1": "Araklı 1961 Spor",
+      "team2": "Hubuş FK",
+      "score1": null,
+      "score2": null,
+      "penalty1": null,
+      "penalty2": null,
+      "hasPenalty": false,
+      "date": "14.07.2025",
+      "time": "22:00",
+      "link": null,
+      "played": false,
+      "winner": null,
+      "matchResult": "normal"
     }
   ],
   "final": null,

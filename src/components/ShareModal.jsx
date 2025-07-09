@@ -40,8 +40,9 @@ function ShareModal({ match, type = 'match', data, isVisible, onClose }) {
     let text = ''
     
     if (type === 'match' && match) {
+      const penaltyText = match.hasPenalty ? ` (Pen: ${match.penalty1}-${match.penalty2})` : ''
       text = `🏆 D-8 ŞAMPİYONLAR LİGİ MAÇ SONUCU 🏆
-⚽ ${match.team1} ${match.score1}-${match.score2} ${match.team2}
+⚽ ${match.team1} ${match.score1}-${match.score2} ${match.team2}${penaltyText}
 📅 ${match.date} | ${match.group}
 🔗 https://ofgencsaadet.github.io/d-8-ligi`
     } else if (type === 'standings' && data) {
@@ -157,21 +158,45 @@ function ShareModal({ match, type = 'match', data, isVisible, onClose }) {
       ctx.textAlign = 'left'
       ctx.fillText(match.score2, centerX + 30, scoreY)  // Sağ skor
 
-      // Grup ve tarih (yer değişti, alt alta)
+      // Penaltı skorları (eğer varsa)
+      let penaltyY = scoreY
+      if (match.hasPenalty) {
+        penaltyY = scoreY + 100
+        ctx.fillStyle = '#9333ea' // Purple color
+        ctx.font = 'bold 48px Arial'
+        ctx.textAlign = 'center'
+        ctx.fillText('⚽ Penaltı', centerX, penaltyY)
+        
+        // Penaltı skorları
+        penaltyY += 60
+        ctx.font = 'bold 72px Arial'
+        ctx.textAlign = 'right'
+        ctx.fillText(match.penalty1, centerX - 30, penaltyY)
+        
+        ctx.textAlign = 'center'
+        ctx.fillText('-', centerX, penaltyY)
+        
+        ctx.textAlign = 'left'
+        ctx.fillText(match.penalty2, centerX + 30, penaltyY)
+      }
+
+      // Grup ve tarih (penaltı durumuna göre pozisyon ayarla)
+      const groupDateY = penaltyY + (match.hasPenalty ? 100 : 120)
       ctx.fillStyle = '#666666'
       ctx.font = '42px Arial'
       ctx.textAlign = 'center'
-      ctx.fillText(`${match.group}`, centerX, scoreY + 120)
-      ctx.fillText(`📅 ${match.date}`, centerX, scoreY + 180)
+      ctx.fillText(`${match.group}`, centerX, groupDateY)
+      ctx.fillText(`📅 ${match.date}`, centerX, groupDateY + 60)
 
-      // Website
+      // Website (pozisyon güncellendi)
+      const websiteY = groupDateY + 120
       ctx.fillStyle = '#667eea'
       ctx.font = '36px Arial'
-      ctx.fillText('ofgencsaadet.github.io/d-8-ligi', centerX, scoreY + 260)
+      ctx.fillText('ofgencsaadet.github.io/d-8-ligi', centerX, websiteY)
 
-      // Rastgele söz ekle
+      // Rastgele söz ekle (pozisyon güncellendi)
       const randomQuote = getRandomQuote()
-      const quoteY = scoreY + 340
+      const quoteY = websiteY + 80
       
       // Söz metni (italic)
       ctx.fillStyle = '#555555'
@@ -763,9 +788,15 @@ function ShareModal({ match, type = 'match', data, isVisible, onClose }) {
               <>
                 <div className="text-lg font-semibold text-gray-800">
                   {match.team1} {match.score1}-{match.score2} {match.team2}
+                  {match.hasPenalty && (
+                    <span className="text-purple-600 font-medium ml-2">(Pen: {match.penalty1}-{match.penalty2})</span>
+                  )}
                 </div>
                 <div className="text-sm text-gray-600 mt-1">
                   📅 {match.date} | {match.group}
+                  {match.hasPenalty && (
+                    <span className="ml-2 bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">⚽ Penaltı</span>
+                  )}
                 </div>
               </>
             ) : type === 'standings' && data ? (

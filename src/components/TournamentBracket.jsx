@@ -302,7 +302,12 @@ function TournamentBracket({ data, onTeamComparison }) {
                 />
               </div>
               {showScore && isPlayed && (
-                <span className="font-bold text-blue-600 dark:text-blue-400 flex-shrink-0">{match.score1}</span>
+                <div className="flex items-center flex-shrink-0">
+                  <span className="font-bold text-blue-600 dark:text-blue-400">{match.score1}</span>
+                  {match.hasPenalty && (
+                    <span className="text-xs text-purple-600 dark:text-purple-400 font-medium ml-1">({match.penalty1})</span>
+                  )}
+                </div>
               )}
             </div>
             
@@ -314,7 +319,12 @@ function TournamentBracket({ data, onTeamComparison }) {
                 />
               </div>
               {showScore && isPlayed && (
-                <span className="font-bold text-blue-600 dark:text-blue-400 flex-shrink-0">{match.score2}</span>
+                <div className="flex items-center flex-shrink-0">
+                  <span className="font-bold text-blue-600 dark:text-blue-400">{match.score2}</span>
+                  {match.hasPenalty && (
+                    <span className="text-xs text-purple-600 dark:text-purple-400 font-medium ml-1">({match.penalty2})</span>
+                  )}
+                </div>
               )}
             </div>
           </div>
@@ -326,6 +336,13 @@ function TournamentBracket({ data, onTeamComparison }) {
             <div className="flex items-center justify-center gap-1 flex-wrap">
               <span className="text-xs">📅 {match.date}</span>
               {match.time && <span className="text-xs">🕒 {match.time}</span>}
+              
+              {/* Penaltı işareti */}
+              {match.hasPenalty && (
+                <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-1 rounded font-medium">
+                  ⚽ Penaltı
+                </span>
+              )}
               
               {/* Hava durumu */}
               {(() => {

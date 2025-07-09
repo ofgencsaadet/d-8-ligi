@@ -48,11 +48,15 @@ async function processPlayoffExcel() {
       const matchType = matchTypeRow[0]
       const team1 = teamsRow[0]
       const team2 = teamsRow[1]
-      const score1 = teamsRow[3] // Skor 1
-      const score2 = teamsRow[4] // Skor 2
-      const date = teamsRow[5]   // Tarih
-      const time = teamsRow[6]   // Saat
-      const link = teamsRow[7]   // Link (H sütunu)
+      const score1 = teamsRow[3] // Skor 1 (D sütunu)
+      const score2 = teamsRow[4] // Skor 2 (E sütunu)
+      const date = teamsRow[5]   // Tarih (F sütunu)
+      const time = teamsRow[6]   // Saat (G sütunu)
+      const penalty1 = teamsRow[8] // Penaltı 1 (I sütunu)
+      const penalty2 = teamsRow[9] // Penaltı 2 (J sütunu)
+      const link = teamsRow[10]  // Link (K sütunu)
+      
+
       
       if (!matchType || !team1 || !team2) {
         continue
@@ -79,27 +83,53 @@ async function processPlayoffExcel() {
         formattedTime = time.trim()
       }
 
+      // Penaltı skorlarını kontrol et
+      const hasPenalty = penalty1 !== undefined && penalty1 !== '' && penalty2 !== undefined && penalty2 !== ''
+      const penaltyScore1 = hasPenalty ? parseInt(penalty1) : null
+      const penaltyScore2 = hasPenalty ? parseInt(penalty2) : null
+
       const match = {
         matchType: matchType?.trim(),
         team1: team1?.trim(),
         team2: team2?.trim(),
         score1: score1 !== undefined && score1 !== '' ? parseInt(score1) : null,
         score2: score2 !== undefined && score2 !== '' ? parseInt(score2) : null,
+        penalty1: penaltyScore1,
+        penalty2: penaltyScore2,
+        hasPenalty: hasPenalty,
         date: formattedDate,
         time: formattedTime,
         link: link && typeof link === 'string' ? link.trim() : null,
         played: score1 !== undefined && score1 !== '' && score2 !== undefined && score2 !== '',
-        winner: null
+        winner: null,
+        matchResult: 'normal' // 'normal', 'penalty', 'draw'
       }
 
       // Galibi belirle
       if (match.played) {
         if (match.score1 > match.score2) {
           match.winner = match.team1
+          match.matchResult = 'normal'
         } else if (match.score2 > match.score1) {
           match.winner = match.team2
+          match.matchResult = 'normal'
         } else {
-          match.winner = 'Beraberlik' // Penaltıyla belirlenebilir
+          // Normal skor berabere - penaltı kontrol et
+          if (hasPenalty) {
+            if (penaltyScore1 > penaltyScore2) {
+              match.winner = match.team1
+              match.matchResult = 'penalty'
+            } else if (penaltyScore2 > penaltyScore1) {
+              match.winner = match.team2
+              match.matchResult = 'penalty'
+            } else {
+              match.winner = 'Beraberlik' // Penaltıda da berabere (çok nadir)
+              match.matchResult = 'draw'
+            }
+          } else {
+            match.winner = 'Beraberlik' // Normal zamanda berabere, penaltı yok
+            match.matchResult = 'draw'
+          }
         }
       }
 
@@ -199,6 +229,19 @@ async function processPlayoffExcel() {
     console.log(`   - Final: ${playoff.final ? '1 maç' : 'Henüz yok'}`)
     console.log(`   - 3. lük: ${playoff.thirdPlace ? '1 maç' : 'Henüz yok'}`)
     console.log(`   - Şampiyon: ${playoff.champion || 'Henüz yok'}`)
+
+    // Penaltılı maçları göster
+    const allMatches = [...playoff.quarterFinals, ...playoff.semiFinals]
+    if (playoff.final) allMatches.push(playoff.final)
+    if (playoff.thirdPlace) allMatches.push(playoff.thirdPlace)
+    
+    const penaltyMatches = allMatches.filter(match => match.hasPenalty)
+    if (penaltyMatches.length > 0) {
+      console.log(`   - Penaltılı maç sayısı: ${penaltyMatches.length}`)
+      penaltyMatches.forEach(match => {
+        console.log(`     * ${match.team1} ${match.score1}-${match.score2} ${match.team2} (Pen: ${match.penalty1}-${match.penalty2}) - Galip: ${match.winner}`)
+      })
+    }
 
   } catch (error) {
     console.error('❌ Kupa Yolu Excel işleme hatası:', error.message)
