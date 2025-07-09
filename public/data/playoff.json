@@ -28,13 +28,13 @@
       "matchType": "Çeyrek Final 3",
       "team1": "Çirihtalar",
       "team2": "Araklı 1961 Spor",
-      "score1": null,
-      "score2": null,
+      "score1": 1,
+      "score2": 5,
       "date": "09.07.2025",
       "time": "21:00",
       "link": null,
-      "played": false,
-      "winner": null
+      "played": true,
+      "winner": "Araklı 1961 Spor"
     },
     {
       "matchType": "Çeyrek Final 4",
