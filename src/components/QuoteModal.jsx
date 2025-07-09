@@ -23,7 +23,7 @@ function QuoteModal({ isVisible, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-2xl max-w-md w-full mx-4 relative transform transition-all duration-300 scale-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl max-w-md w-full mx-4 relative transform transition-all duration-300 scale-100">
         {/* Çarpı Butonu - 1 saniye sonra görünür */}
         {showCloseButton && (
           <button
@@ -45,18 +45,18 @@ function QuoteModal({ isVisible, onClose }) {
           </div>
 
           {/* Söz */}
-          <blockquote className="text-lg md:text-xl text-gray-800 font-medium mb-4 leading-relaxed">
+          <blockquote className="text-lg md:text-xl text-gray-800 dark:text-gray-200 font-medium mb-4 leading-relaxed">
             "{quote.text}"
           </blockquote>
 
           {/* Yazar */}
-          <cite className="text-sm md:text-base text-gray-600 font-semibold">
+          <cite className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-semibold">
             — {quote.author}
           </cite>
 
           {/* Alt Çizgi */}
-          <div className="mt-6 pt-4 border-t border-gray-200">
-            <p className="text-xs text-gray-500">
+          <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-600">
+            <p className="text-xs text-gray-500 dark:text-gray-400">
               D-8 Şampiyonlar Ligine Hoş Geldiniz! 🏆
             </p>
           </div>

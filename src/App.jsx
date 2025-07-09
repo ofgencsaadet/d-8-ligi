@@ -129,17 +129,17 @@ function App() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md text-center">
-          <div className="text-red-600 text-xl mb-2">⚠️ Hata</div>
-          <p className="text-red-700">{error}</p>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200 flex items-center justify-center">
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 max-w-md text-center">
+          <div className="text-red-600 dark:text-red-400 text-xl mb-2">⚠️ Hata</div>
+          <p className="text-red-700 dark:text-red-300">{error}</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       {/* Söz Modal'ı */}
       <QuoteModal 
         isVisible={showQuoteModal} 
@@ -153,7 +153,7 @@ function App() {
         <div className="mb-8 text-center">
           <button
             onClick={() => setShowHeadToHeadModal(true)}
-            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg"
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 dark:from-purple-700 dark:to-blue-700 dark:hover:from-purple-800 dark:hover:to-blue-800 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg"
           >
             🥊 Takım Karşılaştırma
           </button>
@@ -171,7 +171,7 @@ function App() {
 
           {/* Puan Tabloları */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6 text-center">
               📊 Puan Tabloları
             </h2>
             {standings && (
@@ -191,7 +191,7 @@ function App() {
           {/* Oynanacak Maçlar - Sadece maç varsa göster */}
           {upcomingMatches.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6 text-center">
               📅 Oynanacak Maçlar
             </h2>
             <MatchList 
@@ -204,7 +204,7 @@ function App() {
 
           {/* Oynanmış Maçlar */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6 text-center">
               ✅ Oynanmış Maçlar
             </h2>
             <MatchList matches={playedMatches} type="played" />
@@ -222,9 +222,9 @@ function App() {
               }
             }}
           >
-            <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
-                <h2 className="text-xl font-bold text-gray-800">🏆 Takım Karşılaştırması</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex justify-between items-center">
+                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">🏆 Takım Karşılaştırması</h2>
                 <button
                   onClick={() => {
                     setShowHeadToHeadModal(false)
@@ -246,7 +246,7 @@ function App() {
         )}
       </main>
 
-      <footer className="bg-gray-800 text-white py-6 mt-12">
+      <footer className="bg-gray-800 dark:bg-gray-950 text-white py-6 mt-12">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; 2025 Saadet Partisi Of İlçe Gençlik Kolları D-8 Şampiyonlar Ligi. Tüm hakları saklıdır.</p>
         </div>

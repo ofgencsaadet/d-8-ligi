@@ -268,7 +268,7 @@ function TournamentBracket({ data, onTeamComparison }) {
   // Maç kutusu bileşeni
   const MatchBox = ({ match, size = 'normal', showScore = true, className = '' }) => {
     if (!match) return (
-      <div className={`w-full h-16 bg-gray-100 rounded border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-sm ${className}`}>
+      <div className={`w-full h-16 bg-gray-100 dark:bg-gray-700 rounded border-2 border-dashed border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 text-sm ${className}`}>
         Beklemede
       </div>
     )
@@ -276,9 +276,9 @@ function TournamentBracket({ data, onTeamComparison }) {
     const isPlayed = match.played
     const isWinner = (team) => match.winner === team
     
-    let bgColor = 'bg-gray-100'
+    let bgColor = 'bg-gray-100 dark:bg-gray-700'
     if (isPlayed) {
-      bgColor = 'bg-white'
+      bgColor = 'bg-white dark:bg-gray-800'
     }
 
     const sizeClasses = {
@@ -290,31 +290,31 @@ function TournamentBracket({ data, onTeamComparison }) {
     return (
       <div className={`w-full ${className}`}>
         <div 
-          className={`w-full ${sizeClasses[size]} ${bgColor} rounded border-2 border-gray-200 shadow-sm transition-all hover:shadow-md cursor-pointer ${isPlayed ? 'hover:border-blue-300' : 'hover:border-purple-300'}`}
+          className={`w-full ${sizeClasses[size]} ${bgColor} rounded border-2 border-gray-200 dark:border-gray-600 shadow-sm transition-all hover:shadow-md cursor-pointer ${isPlayed ? 'hover:border-blue-300 dark:hover:border-blue-500' : 'hover:border-purple-300 dark:hover:border-purple-500'}`}
           onClick={() => handleMatchClick(match)}
         >
           <div className="h-full flex flex-col">
             {/* Takım 1 */}
-            <div className={`flex-1 flex items-center px-3 border-b border-gray-200 ${isWinner(match.team1) ? 'bg-green-100 font-bold text-green-800' : ''}`}>
+            <div className={`flex-1 flex items-center px-3 border-b border-gray-200 dark:border-gray-600 ${isWinner(match.team1) ? 'bg-green-100 dark:bg-green-900/30 font-bold text-green-800 dark:text-green-400' : 'text-gray-800 dark:text-gray-200'}`}>
               <div className="flex-1 min-w-0 mr-2 overflow-hidden">
                 <TeamName 
                   teamName={match.team1} 
                 />
               </div>
               {showScore && isPlayed && (
-                <span className="font-bold text-blue-600 flex-shrink-0">{match.score1}</span>
+                <span className="font-bold text-blue-600 dark:text-blue-400 flex-shrink-0">{match.score1}</span>
               )}
             </div>
             
             {/* Takım 2 */}
-            <div className={`flex-1 flex items-center px-3 ${isWinner(match.team2) ? 'bg-green-100 font-bold text-green-800' : ''}`}>
+            <div className={`flex-1 flex items-center px-3 ${isWinner(match.team2) ? 'bg-green-100 dark:bg-green-900/30 font-bold text-green-800 dark:text-green-400' : 'text-gray-800 dark:text-gray-200'}`}>
               <div className="flex-1 min-w-0 mr-2 overflow-hidden">
                 <TeamName 
                   teamName={match.team2} 
                 />
               </div>
               {showScore && isPlayed && (
-                <span className="font-bold text-blue-600 flex-shrink-0">{match.score2}</span>
+                <span className="font-bold text-blue-600 dark:text-blue-400 flex-shrink-0">{match.score2}</span>
               )}
             </div>
           </div>
@@ -322,7 +322,7 @@ function TournamentBracket({ data, onTeamComparison }) {
         
         {/* Tarih - sadece normal ve large size için */}
         {(size === 'normal' || size === 'large') && match.date && (
-          <div className="text-xs text-gray-500 px-3 py-1 mt-1 bg-gray-50 rounded text-center">
+          <div className="text-xs text-gray-500 dark:text-gray-400 px-3 py-1 mt-1 bg-gray-50 dark:bg-gray-700 rounded text-center">
             <div className="flex items-center justify-center gap-1 flex-wrap">
               <span className="text-xs">📅 {match.date}</span>
               {match.time && <span className="text-xs">🕒 {match.time}</span>}
@@ -333,7 +333,7 @@ function TournamentBracket({ data, onTeamComparison }) {
                 return weather ? (
                   <div className="flex items-center gap-1">
                     <span className="text-xs">{weather.icon}</span>
-                    <span className="font-medium text-blue-600 text-xs">{weather.temperature}°C</span>
+                    <span className="font-medium text-blue-600 dark:text-blue-400 text-xs">{weather.temperature}°C</span>
                   </div>
                 ) : null
               })()}
@@ -369,19 +369,19 @@ function TournamentBracket({ data, onTeamComparison }) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-8 relative">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 md:p-6 mb-8 relative">
       {/* Şampiyon arka plan yazısı */}
       {data.champion && <ChampionBackground championName={data.champion} />}
       
       {/* Başlık */}
       <div className="text-center mb-6 relative z-10">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-2">
           🏆 Kupa Yolu
         </h2>
         {data.champion && (
-          <div className="inline-flex items-center px-4 py-2 bg-yellow-100 border-2 border-yellow-400 rounded-lg shadow-lg">
+          <div className="inline-flex items-center px-4 py-2 bg-yellow-100 dark:bg-yellow-900/50 border-2 border-yellow-400 dark:border-yellow-500 rounded-lg shadow-lg">
             <span className="text-2xl mr-2 animate-bounce-gentle">🏆</span>
-            <span className="text-lg md:text-xl font-bold text-yellow-800">Şampiyon: {data.champion}</span>
+            <span className="text-lg md:text-xl font-bold text-yellow-800 dark:text-yellow-200">Şampiyon: {data.champion}</span>
           </div>
         )}
       </div>
@@ -389,7 +389,7 @@ function TournamentBracket({ data, onTeamComparison }) {
       {/* Mobil görünüm - Kaydırılabilir masaüstü bracket */}
       <div className="block lg:hidden relative z-10">
         {/* Kaydırma ipucu */}
-        <div className="text-center mb-4 text-sm text-gray-500">
+        <div className="text-center mb-4 text-sm text-gray-500 dark:text-gray-400">
           ← Sağa sola kaydırarak tüm kupa yolunu görün →
         </div>
         
@@ -496,15 +496,15 @@ function TournamentBracket({ data, onTeamComparison }) {
 
         {/* Kaydırma ipucu - 3.lük için */}
         {data.thirdPlace && (
-          <div className="text-center mt-8 mb-4 text-sm text-gray-500">
+          <div className="text-center mt-8 mb-4 text-sm text-gray-500 dark:text-gray-400">
             ← Sağa sola kaydırarak tüm kupa yolunu görün →
           </div>
         )}
 
         {/* 3. lük maçı - Alt kısım */}
         {data.thirdPlace && (
-          <div className="mt-8 pt-8 border-t-2 border-gray-300">
-            <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">🥉 3. lük Maçı</h3>
+          <div className="mt-8 pt-8 border-t-2 border-gray-300 dark:border-gray-600">
+            <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300 mb-4 text-center">🥉 3. lük Maçı</h3>
             <div className="flex justify-center">
               <div className="w-64">
                 <MatchBox match={data.thirdPlace} size="normal" />
@@ -513,7 +513,7 @@ function TournamentBracket({ data, onTeamComparison }) {
                 {/* Kazanan bilgisi için sabit alan */}
                 <div className="h-8 mt-3 flex items-center justify-center">
                   {data.thirdPlace.winner && (
-                    <span className="text-sm font-bold text-orange-600 bg-orange-100 px-2 py-1 rounded">
+                    <span className="text-sm font-bold text-orange-600 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/50 px-2 py-1 rounded">
                       🥉 3. lük: {data.thirdPlace.winner}
                     </span>
                   )}
@@ -577,8 +577,8 @@ function TournamentBracket({ data, onTeamComparison }) {
               <div className="text-4xl animate-bounce-gentle">🏆</div>
               {data.champion && (
                 <div className="text-center">
-                  <div className="text-xs text-gray-600">Şampiyon</div>
-                  <div className="text-sm font-bold text-yellow-600">{data.champion}</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">Şampiyon</div>
+                  <div className="text-sm font-bold text-yellow-600 dark:text-yellow-400">{data.champion}</div>
                 </div>
               )}
             </div>
@@ -626,8 +626,8 @@ function TournamentBracket({ data, onTeamComparison }) {
 
         {/* 3. lük maçı - Alt kısım */}
         {data.thirdPlace && (
-          <div className="mt-16 pt-8 border-t-2 border-gray-300">
-            <h3 className="text-lg font-bold text-gray-700 mb-4 text-center">🥉 3. lük Maçı</h3>
+          <div className="mt-16 pt-8 border-t-2 border-gray-300 dark:border-gray-600">
+            <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300 mb-4 text-center">🥉 3. lük Maçı</h3>
             <div className="flex justify-center">
               <div className="w-64">
                 <MatchBox match={data.thirdPlace} size="normal" />

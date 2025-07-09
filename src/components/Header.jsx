@@ -1,8 +1,15 @@
+import DarkModeToggle from './DarkModeToggle'
+
 function Header() {
   return (
-    <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
+    <header className="bg-gradient-to-r from-blue-600 to-blue-800 dark:from-gray-800 dark:to-gray-900 text-white shadow-lg">
       <div className="container mx-auto px-4 py-6">
         <div className="relative">
+          {/* Dark Mode Toggle - Sağ üst köşe */}
+          <div className="absolute right-0 top-0 z-10">
+            <DarkModeToggle />
+          </div>
+          
           {/* Logo - Sol tarafta */}
           <div className="absolute left-0 top-0 hidden md:block">
             <div className="bg-white rounded-lg p-2 shadow-lg">
