@@ -6,6 +6,7 @@ import LoadingSpinner from './components/LoadingSpinner'
 import QuoteModal from './components/QuoteModal'
 import HeadToHead from './components/HeadToHead'
 import TournamentBracket from './components/TournamentBracket'
+import DarkModeToggle from './components/DarkModeToggle'
 
 function App() {
   const [standings, setStandings] = useState(null)
@@ -251,6 +252,9 @@ function App() {
           <p>&copy; 2025 Saadet Partisi Of İlçe Gençlik Kolları D-8 Şampiyonlar Ligi. Tüm hakları saklıdır.</p>
         </div>
       </footer>
+      
+      {/* Dark Mode Toggle - Ekranın sağ alt köşesinde sabit */}
+      <DarkModeToggle />
     </div>
   )
 }

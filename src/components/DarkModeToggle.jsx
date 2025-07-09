@@ -32,10 +32,12 @@ function DarkModeToggle() {
   return (
     <button
       onClick={toggleDarkMode}
-      className="p-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors duration-200 text-white hover:scale-105 transform"
+      className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 border-2 border-white/20 dark:border-gray-800/20"
       title={isDark ? 'Açık temaya geç' : 'Koyu temaya geç'}
     >
-      {isDark ? '☀️' : '🌙'}
+      <span className="text-xl">
+        {isDark ? '☀️' : '🌙'}
+      </span>
     </button>
   )
 }
