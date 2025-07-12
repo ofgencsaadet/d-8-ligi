@@ -8,6 +8,7 @@ import HeadToHead from './components/HeadToHead'
 import TournamentBracket from './components/TournamentBracket'
 import DarkModeToggle from './components/DarkModeToggle'
 import MusicToggle from './components/MusicToggle'
+import SocialMediaLinks from './components/SocialMediaLinks'
 
 function App() {
   const [standings, setStandings] = useState(null)
@@ -257,8 +258,11 @@ function App() {
       {/* Dark Mode Toggle - Ekranın sağ alt köşesinde sabit */}
       <DarkModeToggle />
       
-      {/* Music Toggle - Ekranın sol alt köşesinde sabit */}
-      <MusicToggle />
+      {/* Social Media Links - Dark mode toggle'ın üstünde */}
+      <SocialMediaLinks />
+      
+      {/* Music Toggle - Ekranın sol alt köşesinde sabit - Sadece şampiyon varsa */}
+      <MusicToggle champion={playoffData?.champion} />
     </div>
   )
 }

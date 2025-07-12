@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 
-function MusicToggle() {
+function MusicToggle({ champion }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const audioRef = useRef(null)
 
@@ -18,42 +18,6 @@ function MusicToggle() {
     audio.addEventListener('play', () => setIsPlaying(true))
     audio.addEventListener('pause', () => setIsPlaying(false))
     audio.addEventListener('ended', () => setIsPlaying(false))
-    
-    // Sayfa yüklendiğinde müziği hemen başlat
-    const startMusic = async () => {
-      try {
-        await audio.play()
-        setIsPlaying(true)
-      } catch (error) {
-        console.log('Müzik otomatik çalamadı - kullanıcı etkileşimi gerekli:', error)
-        // Kullanıcı etkileşimi sonrası müziği başlat
-        startMusicOnUserInteraction()
-      }
-    }
-
-    // Kullanıcı etkileşimi sonrası müzik başlat
-    const startMusicOnUserInteraction = () => {
-      const startOnClick = async () => {
-        try {
-          await audio.play()
-          setIsPlaying(true)
-          // Event listener'ı kaldır
-          document.removeEventListener('click', startOnClick)
-          document.removeEventListener('keydown', startOnClick)
-          document.removeEventListener('touchstart', startOnClick)
-        } catch (error) {
-          console.log('Kullanıcı etkileşimi ile de müzik çalamadı:', error)
-        }
-      }
-
-      // Herhangi bir kullanıcı etkileşimini dinle
-      document.addEventListener('click', startOnClick, { once: true })
-      document.addEventListener('keydown', startOnClick, { once: true })
-      document.addEventListener('touchstart', startOnClick, { once: true })
-    }
-
-    // Hiç beklemeden müziği başlat
-    startMusic()
 
     return () => {
       audio.pause()
@@ -66,6 +30,53 @@ function MusicToggle() {
       document.removeEventListener('touchstart', () => {})
     }
   }, [])
+
+  // Şampiyon durumuna göre müzik kontrolü
+  useEffect(() => {
+    if (!audioRef.current) return
+
+    if (champion) {
+      // Şampiyon varsa müziği başlat
+      const startMusic = async () => {
+        try {
+          await audioRef.current.play()
+          setIsPlaying(true)
+        } catch (error) {
+          console.log('Müzik otomatik çalamadı - kullanıcı etkileşimi gerekli:', error)
+          // Kullanıcı etkileşimi sonrası müziği başlat
+          startMusicOnUserInteraction()
+        }
+      }
+
+      // Kullanıcı etkileşimi sonrası müzik başlat
+      const startMusicOnUserInteraction = () => {
+        const startOnClick = async () => {
+          try {
+            await audioRef.current.play()
+            setIsPlaying(true)
+            // Event listener'ı kaldır
+            document.removeEventListener('click', startOnClick)
+            document.removeEventListener('keydown', startOnClick)
+            document.removeEventListener('touchstart', startOnClick)
+          } catch (error) {
+            console.log('Kullanıcı etkileşimi ile de müzik çalamadı:', error)
+          }
+        }
+
+        // Herhangi bir kullanıcı etkileşimini dinle
+        document.addEventListener('click', startOnClick, { once: true })
+        document.addEventListener('keydown', startOnClick, { once: true })
+        document.addEventListener('touchstart', startOnClick, { once: true })
+      }
+
+      // Hiç beklemeden müziği başlat
+      startMusic()
+    } else {
+      // Şampiyon yoksa müziği durdur
+      audioRef.current.pause()
+      setIsPlaying(false)
+    }
+  }, [champion])
 
   // Müziği çal/durdur
   const toggleMusic = async () => {
@@ -83,6 +94,11 @@ function MusicToggle() {
     }
   }
 
+  // Şampiyon yoksa butonu gösterme
+  if (!champion) {
+    return null
+  }
+
   return (
     <div className="fixed bottom-6 left-6 z-50">
       <button
@@ -94,12 +110,10 @@ function MusicToggle() {
         } text-white flex items-center justify-center`}
         title={isPlaying ? 'Müziği Durdur' : 'Müziği Çal'}
       >
-            <span className="text-xl">
-        {isPlaying ? '⏸️' : '▶️'}
-      </span>
+        <span className="text-xl">
+          {isPlaying ? '⏸️' : '▶️'}
+        </span>
       </button>
-      
-
     </div>
   )
 }
