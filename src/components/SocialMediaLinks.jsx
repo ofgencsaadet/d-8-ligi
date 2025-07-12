@@ -48,7 +48,7 @@ function SocialMediaLinks() {
   return (
     <>
       {/* Desktop version - Her zaman görünür */}
-      <div className="hidden md:flex fixed bottom-24 right-6 z-50 flex-col gap-2">
+      <div className="hidden md:flex fixed bottom-24 right-6 z-40 flex-col gap-2">
         {socialLinks.map((link, index) => (
           <a
             key={index}
@@ -68,20 +68,20 @@ function SocialMediaLinks() {
       </div>
 
       {/* Mobile version - Expandable */}
-      <div className="md:hidden fixed bottom-24 right-6 z-50 flex flex-col-reverse gap-2">
-        {/* Toggle Button - Alt kısımda sabit */}
+      <div className="md:hidden fixed bottom-24 right-6 z-40 flex flex-col-reverse gap-2">
+        {/* Toggle Button - Her zaman görünür, ok yönü değişir */}
         <button
           onClick={toggleExpanded}
           className="p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 border-2 border-white/20 dark:border-gray-800/20 bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white flex items-center justify-center"
           title="Sosyal medya hesaplarımız"
         >
-          <span className="text-lg">
-            {isExpanded ? '✕' : '📱'}
+          <span className="text-lg transition-transform duration-300">
+            {isExpanded ? '＞' : '＜'}
           </span>
         </button>
 
-        {/* Expandable Social Links - Üstte açılır */}
-        <div className={`flex flex-col-reverse gap-2 transition-all duration-300 transform ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}`}>
+        {/* Expandable Social Links - Sağdan kayarak açılır */}
+        <div className={`flex flex-col-reverse gap-2 transition-all duration-300 transform ${isExpanded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'}`}>
           {socialLinks.map((link, index) => (
             <a
               key={index}
