@@ -408,18 +408,18 @@ function MatchList({ matches, type, onTeamComparison }) {
                           {type === 'played' ? (
                             <div className="flex items-center space-x-2 flex-shrink-0">
                               <div className="flex items-center">
-                                <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
-                                  {match.score1}
-                                </span>
+                              <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                                {match.score1}
+                              </span>
                                 {match.hasPenalty && (
                                   <span className="text-sm text-purple-600 dark:text-purple-400 font-medium ml-1">({match.penalty1})</span>
                                 )}
                               </div>
                               <span className="text-gray-400 dark:text-gray-500">-</span>
                               <div className="flex items-center">
-                                <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
-                                  {match.score2}
-                                </span>
+                              <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                                {match.score2}
+                              </span>
                                 {match.hasPenalty && (
                                   <span className="text-sm text-purple-600 dark:text-purple-400 font-medium ml-1">({match.penalty2})</span>
                                 )}

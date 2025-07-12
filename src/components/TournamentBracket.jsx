@@ -7,6 +7,7 @@ function TournamentBracket({ data, onTeamComparison }) {
   const [forecastData, setForecastData] = useState(null)
   const [weatherLoading, setWeatherLoading] = useState(false)
 
+
   // Hava durumu verilerini yükle
   useEffect(() => {
     const loadWeatherData = async () => {
@@ -463,8 +464,10 @@ function TournamentBracket({ data, onTeamComparison }) {
                 <div className="text-4xl animate-bounce-gentle">🏆</div>
                 {data.champion && (
                   <div className="text-center">
-                    <div className="text-xs text-gray-600">Şampiyon</div>
-                    <div className="text-sm font-bold text-yellow-600">{data.champion}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Şampiyon</div>
+                    <div className="text-sm font-bold text-yellow-600 dark:text-yellow-400">{data.champion}</div>
+                    
+                    
                   </div>
                 )}
               </div>
@@ -596,6 +599,8 @@ function TournamentBracket({ data, onTeamComparison }) {
                 <div className="text-center">
                   <div className="text-xs text-gray-600 dark:text-gray-400">Şampiyon</div>
                   <div className="text-sm font-bold text-yellow-600 dark:text-yellow-400">{data.champion}</div>
+                  
+
                 </div>
               )}
             </div>

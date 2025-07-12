@@ -7,6 +7,7 @@ import QuoteModal from './components/QuoteModal'
 import HeadToHead from './components/HeadToHead'
 import TournamentBracket from './components/TournamentBracket'
 import DarkModeToggle from './components/DarkModeToggle'
+import MusicToggle from './components/MusicToggle'
 
 function App() {
   const [standings, setStandings] = useState(null)
@@ -255,6 +256,9 @@ function App() {
       
       {/* Dark Mode Toggle - Ekranın sağ alt köşesinde sabit */}
       <DarkModeToggle />
+      
+      {/* Music Toggle - Ekranın sol alt köşesinde sabit */}
+      <MusicToggle />
     </div>
   )
 }
