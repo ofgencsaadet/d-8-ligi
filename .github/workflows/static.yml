@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -11,25 +11,35 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Install dependencies
+        run: |
+          echo "--- Installing dependencies ---"
+          npm ci
+      - name: Build project
+        run: |
+          echo "--- Building project ---"
+          npm run build
+      - name: Setup GitHub Pages
+        run: echo "--- Configuring GitHub Pages ---"
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        run: echo "--- Uploading build artifact ---"
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        run: echo "--- Deploying to GitHub Pages ---"
+      - name: Deploy Pages
         id: deployment
+        uses: actions/deploy-pages@v4
