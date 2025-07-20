@@ -7,9 +7,10 @@ https://ofgencsaadet.github.io/d-8-ligi/
 Excel dosyasında maç sonuçlarını güncelledikten sonra aşağıdaki adımları sırasıyla takip edin:
 
 ### 1. Excel Dosyasını Düzenleyin
-- `data` klasörü içerisindeki excel dosyalarını güncelleyin
+`data` klasörü içerisindeki excel dosyalarını güncelleyin
 
 ### 2. Verileri İşleyin
+Ana dizin içerisinde terminali açın ve aşağıdaki komutları çalıştırın
 ```bash
 npm run process-data
 npm run process-playoff
